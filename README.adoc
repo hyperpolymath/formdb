@@ -59,7 +59,7 @@ FormDB is structured in layers, each with a specific language and responsibility
 │  FQL parse/plan/exec, explain, introspection                │
 ├─────────────────────────────────────────────────────────────┤
 │  Form.Bridge (Zig)                                          │
-│  Stable C ABI boundary, safety governor                     │
+│  Stable Zig ABI (no C), safety governor                     │
 ├─────────────────────────────────────────────────────────────┤
 │  Form.Model (Forth)                                         │
 │  Multi-model logical layer: documents, edges, schemas       │
@@ -84,9 +84,10 @@ FormDB is structured in layers, each with a specific language and responsibility
 * Migration artefacts
 
 ==== Form.Bridge (Zig)
-* Narrow C ABI for runtimes
+* Stable Zig ABI for runtimes (no C dependency)
 * Opaque handles + byte buffers + explicit error codes
 * Marshalling only; no business logic duplication
+* Uses `callconv(.C)` for FFI compatibility without requiring C toolchain
 
 ==== Form.Runtime (Factor)
 * FQL minimal subset for PoC
@@ -169,6 +170,13 @@ See link:formdb.scm[formdb.scm] for structured open questions with acceptance cr
 * link:ROADMAP.adoc[ROADMAP.adoc] - Development roadmap
 * link:PHILOSOPHY.adoc[PHILOSOPHY.adoc] - Design philosophy and principles
 * link:formdb.scm[formdb.scm] - Machine-readable specification
+* link:docs/WP05_interactive_documentary.md[WP05] - FormDB for Interactive Documentary/Journalism
+* link:spec/fql-dependent-types.md[FQL Dependent Types] - Compile-time verified query language (see also https://github.com/hyperpolymath/fqldt[fqldt repo])
+
+== Related Projects
+
+* https://github.com/hyperpolymath/fqldt[FQLdt] - Dependently-typed FQL (same database, compile-time proofs)
+* https://github.com/hyperpolymath/bofig[BoFIG] - Binary-Origami Figuration (journalism use case)
 
 == License
 
