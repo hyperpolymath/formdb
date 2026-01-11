@@ -20,13 +20,14 @@
       (control-plane "Elixir/OTP (optional)")))
 
   (current-position
-    (phase "specification-complete")
-    (overall-completion 15)
+    (phase "poc-implementation")
+    (overall-completion 65)
     (components
-      (Form.Blocks (status "specified") (completion 10))
-      (Form.Model (status "not-started") (completion 0))
-      (Form.Bridge (status "specified") (completion 10))
-      (Form.Runtime (status "specified") (completion 10))
+      (Form.Blocks (status "implemented") (completion 90))
+      (Form.Model (status "implemented") (completion 85))
+      (Form.Bridge (status "implemented") (completion 80))
+      (Form.Runtime (status "implemented") (completion 70))
+      (Form.Normalizer (status "scaffolded") (completion 40))
       (Form.ControlPlane (status "deferred") (completion 0)))
     (working-features
       "specification document (formdb.scm)"
@@ -35,7 +36,15 @@
       "block storage format spec (spec/blocks.adoc)"
       "journal format spec (spec/journal.adoc)"
       "blob encoding spec (spec/encoding.adoc)"
-      "FQL grammar + 10 examples (spec/fql.adoc)"))
+      "FQL grammar + 10 examples (spec/fql.adoc)"
+      "Form.Blocks implementation (core-forth/src/blocks.fs)"
+      "Journal implementation (core-forth/src/journal.fs)"
+      "Form.Model implementation (core-forth/src/model.fs)"
+      "Form.Bridge Zig ABI (core-zig/src/bridge.zig)"
+      "CBOR encoding (core-zig/src/cbor.zig)"
+      "FQL parser (core-factor/fql/fql.factor)"
+      "FD discovery scaffolding (normalizer/factor/fd-discovery.factor)"
+      "Lean 4 FD types (normalizer/lean/FunDep.lean)"))
 
   (route-to-mvp
     (milestone (id "M1") (name "Specification Complete")
@@ -46,45 +55,45 @@
         (item "Choose ABI blob encoding" (status "complete") (decision "D-ABI-BLOBS-001"))
         (item "Define FQL PoC grammar" (status "complete") (decision "D-FQL-POC-001"))))
     (milestone (id "M2") (name "Form.Blocks PoC")
-      (status "in-progress")
+      (status "complete")
       (items
-        (item "Implement fixed-size blocks" (status "pending"))
-        (item "Implement append-only journal" (status "pending"))
-        (item "Implement crash recovery" (status "pending"))
-        (item "Create golden test vectors" (status "pending"))))
+        (item "Implement fixed-size blocks" (status "complete"))
+        (item "Implement append-only journal" (status "complete"))
+        (item "Implement crash recovery" (status "complete"))
+        (item "Create golden test vectors" (status "complete"))))
     (milestone (id "M3") (name "Form.Model PoC")
-      (status "pending")
+      (status "complete")
       (items
-        (item "Document collections" (status "pending"))
-        (item "Edge collections" (status "pending"))
-        (item "Schema metadata" (status "pending"))
+        (item "Document collections" (status "complete"))
+        (item "Edge collections" (status "complete"))
+        (item "Schema metadata" (status "complete"))
         (item "Migration artefacts" (status "pending"))))
     (milestone (id "M4") (name "Form.Bridge ABI")
-      (status "pending")
+      (status "complete")
       (items
-        (item "Define C ABI surface" (status "pending"))
-        (item "Implement Zig wrapper" (status "pending"))
-        (item "Create bindings documentation" (status "pending"))))
+        (item "Define Zig ABI surface" (status "complete"))
+        (item "Implement Zig wrapper" (status "complete"))
+        (item "CBOR encoding/decoding" (status "complete"))))
     (milestone (id "M5") (name "Form.Runtime PoC")
-      (status "pending")
+      (status "complete")
       (items
-        (item "FQL parser" (status "pending"))
-        (item "Query planner" (status "pending"))
-        (item "EXPLAIN functionality" (status "pending"))
-        (item "Provenance surfaces" (status "pending"))))
+        (item "FQL parser" (status "complete"))
+        (item "Query planner" (status "partial"))
+        (item "EXPLAIN functionality" (status "complete"))
+        (item "Provenance surfaces" (status "partial"))))
     (milestone (id "M6") (name "Form.Normalizer")
-      (status "specification")
+      (status "scaffolded")
       (items
         (item "FD discovery algorithm selection" (status "open") (question "Q-NORM-001"))
         (item "Approximate FD policy" (status "open") (question "Q-NORM-002"))
         (item "Denormalization support" (status "open") (question "Q-NORM-003"))
         (item "FQL-dt integration" (status "open") (question "Q-NORM-004"))
         (item "Query rewriting strategy" (status "open") (question "Q-NORM-005"))
-        (item "Implement DFD algorithm" (status "pending"))
-        (item "DISCOVER DEPENDENCIES command" (status "pending"))
-        (item "Type encoding in Lean 4" (status "pending"))
-        (item "Normal form predicates" (status "pending"))
-        (item "Proposal generation" (status "pending"))
+        (item "Implement DFD algorithm" (status "scaffolded"))
+        (item "DISCOVER DEPENDENCIES command" (status "scaffolded"))
+        (item "Type encoding in Lean 4" (status "complete"))
+        (item "Normal form predicates" (status "complete"))
+        (item "Proposal generation" (status "scaffolded"))
         (item "Narrative templates" (status "pending")))))
 
   (blockers-and-issues
