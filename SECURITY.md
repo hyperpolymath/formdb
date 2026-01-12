@@ -8,7 +8,7 @@
 
 ## Reporting a Vulnerability
 
-If you discover a security vulnerability in FormDB, please report it responsibly:
+If you discover a security vulnerability in FormBD, please report it responsibly:
 
 1. **Do NOT** open a public GitHub issue
 2. Email security concerns to the maintainers
@@ -20,7 +20,7 @@ If you discover a security vulnerability in FormDB, please report it responsibly
 
 ## Security Considerations
 
-FormDB is designed with security as a core principle:
+FormBD is designed with security as a core principle:
 
 ### Auditability
 - All mutations are journaled before commitment

@@ -1,17 +1,17 @@
-= FormDB Architecture
+= FormBD Architecture
 :toc: macro
 :toc-title: Contents
 :toclevels: 3
 :icons: font
 
 [.lead]
-Technical deep-dive into FormDB's layered architecture.
+Technical deep-dive into FormBD's layered architecture.
 
 toc::[]
 
 == Overview
 
-FormDB is structured as a stack of layers, each with a specific responsibility and language choice.
+FormBD is structured as a stack of layers, each with a specific responsibility and language choice.
 
 [source,text]
 ----
@@ -221,11 +221,11 @@ Control plane communicates with core via Erlang ports:
 [source,elixir]
 ----
 # Simplified example
-defmodule FormDB.Core do
+defmodule FormBD.Core do
   use GenServer
 
   def init(_) do
-    port = Port.open({:spawn, "formdb-core"}, [:binary])
+    port = Port.open({:spawn, "formbd-core"}, [:binary])
     {:ok, %{port: port}}
   end
 end

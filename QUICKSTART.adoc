@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: PMPL-1.0
-= FormDB Quickstart
+= FormBD Quickstart
 :toc: macro
 :toc-title: Contents
 :toclevels: 2
@@ -7,24 +7,24 @@
 :source-highlighter: rouge
 
 [.lead]
-Get FormDB running and understand its core concepts in 15 minutes.
+Get FormBD running and understand its core concepts in 15 minutes.
 
 [NOTE]
 ====
 **Project Status: Proof of Concept**
 
-FormDB is in active development. The core Forth implementation (Form.Blocks, Form.Model) is functional. The FQL runtime and higher layers are being built. This quickstart demonstrates the intended workflow.
+FormBD is in active development. The core Forth implementation (Form.Blocks, Form.Model) is functional. The FQL runtime and higher layers are being built. This quickstart demonstrates the intended workflow.
 ====
 
 toc::[]
 
-== What is FormDB?
+== What is FormBD?
 
-FormDB is a *narrative-first, reversible, audit-grade database*. Unlike traditional databases that treat history as an afterthought, FormDB makes provenance, reversibility, and explainability core features.
+FormBD is a *narrative-first, reversible, audit-grade database*. Unlike traditional databases that treat history as an afterthought, FormBD makes provenance, reversibility, and explainability core features.
 
 [cols="1,2"]
 |===
-| If you need... | FormDB provides...
+| If you need... | FormBD provides...
 
 | Audit trails
 | Built-in journal with full operation history
@@ -107,11 +107,11 @@ sudo pacman -S gforth zig just
 
 [source,bash]
 ----
-git clone https://github.com/hyperpolymath/formdb.git
-cd formdb
+git clone https://github.com/hyperpolymath/formbd.git
+cd formbd
 
 # Verify Gforth works with our Forth code
-gforth core-forth/src/formdb-blocks.fs -e "cr .\" Form.Blocks loaded successfully\" cr bye"
+gforth core-forth/src/formbd-blocks.fs -e "cr .\" Form.Blocks loaded successfully\" cr bye"
 ----
 
 Expected output:
@@ -121,7 +121,7 @@ Form.Blocks loaded successfully
 
 == Understanding the Architecture
 
-FormDB is structured in layers:
+FormBD is structured in layers:
 
 [source,text]
 ----
@@ -204,7 +204,7 @@ The `actor` and `rationale` fields are required. Additional provenance fields ar
 
 === 3. PROMPT Scores (Evidence Quality)
 
-FormDB includes a built-in `PROMPT_SCORE` type (0-100) for rating evidence quality:
+FormBD includes a built-in `PROMPT_SCORE` type (0-100) for rating evidence quality:
 
 [cols="1,2"]
 |===
@@ -228,7 +228,7 @@ SELECT * FROM evidence WHERE prompt_score BETWEEN 30 AND 69;
 
 === 4. Edges (Graph Relationships)
 
-FormDB supports edges as first-class citizens:
+FormBD supports edges as first-class citizens:
 
 [source,fql]
 ----
@@ -294,7 +294,7 @@ Some operations are *irreversible-with-story*: they can't be undone, but the jou
 
 === 6. Explainable Constraints
 
-When constraints fail, FormDB explains why:
+When constraints fail, FormBD explains why:
 
 [source,fql]
 ----
@@ -567,7 +567,7 @@ WITH PROVENANCE {
 
 == Block Storage Details
 
-For those interested in the internals, FormDB uses 4 KiB fixed-size blocks:
+For those interested in the internals, FormBD uses 4 KiB fixed-size blocks:
 
 [source,text]
 ----
@@ -610,7 +610,7 @@ Block types include:
 * link:spec/fql.adoc[FQL Language Reference] - Complete query language specification
 * link:spec/fql-dependent-types.md[FQLdt Specification] - Compile-time verified queries with Lean 4
 * link:ARCHITECTURE.adoc[Architecture Guide] - Deep dive into the layer design
-* link:docs/DEPLOYMENT.adoc[Deployment Guide] - Run FormDB in production
+* link:docs/DEPLOYMENT.adoc[Deployment Guide] - Run FormBD in production
 * link:spec/self-normalizing.adoc[Self-Normalizing Spec] - Automatic functional dependency discovery
 
 == Troubleshooting
@@ -640,12 +640,12 @@ The Forth code resets the vocabulary to avoid conflicts with Gforth's built-in B
 
 [source,bash]
 ----
-gforth -e "only forth definitions" core-forth/src/formdb-blocks.fs
+gforth -e "only forth definitions" core-forth/src/formbd-blocks.fs
 ----
 
 === "Permission denied on journal"
 
-FormDB requires write access to the database directory:
+FormBD requires write access to the database directory:
 
 [source,bash]
 ----
@@ -683,14 +683,14 @@ WITH PROVENANCE {
 
 == Getting Help
 
-* https://github.com/hyperpolymath/formdb/issues[GitHub Issues] - Report bugs, request features
-* https://github.com/hyperpolymath/formdb/discussions[GitHub Discussions] - Ask questions
+* https://github.com/hyperpolymath/formbd/issues[GitHub Issues] - Report bugs, request features
+* https://github.com/hyperpolymath/formbd/discussions[GitHub Discussions] - Ask questions
 * link:CONTRIBUTING.adoc[Contributing Guide] - Join development
 * link:ROADMAP.adoc[Roadmap] - See what's planned
 
 == Related Projects
 
 * https://github.com/hyperpolymath/fqldt[FQLdt] - Dependently-typed FQL (compile-time verified queries)
-* https://github.com/hyperpolymath/formdb-studio[FormDB Studio] - Zero-friction GUI
-* https://github.com/hyperpolymath/formdb-debugger[FormDB Debugger] - Proof-carrying debugger
+* https://github.com/hyperpolymath/formbd-studio[FormBD Studio] - Zero-friction GUI
+* https://github.com/hyperpolymath/formbd-debugger[FormBD Debugger] - Proof-carrying debugger
 * https://github.com/hyperpolymath/formbase[FormBase] - Open-source Airtable alternative with provenance

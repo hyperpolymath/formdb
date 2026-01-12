@@ -1,9 +1,9 @@
-;; ECOSYSTEM.scm - FormDB Position in Ecosystem
+;; ECOSYSTEM.scm - FormBD Position in Ecosystem
 ;; Media-Type: application/vnd.ecosystem+scm
 
 (ecosystem
   (version "1.0")
-  (name "FormDB")
+  (name "FormBD")
   (type "database")
   (purpose "Narrative-first, reversible, audit-grade database core")
 
@@ -20,43 +20,43 @@
       (project "valence-shell")
       (relationship "sibling-standard")
       (description "Reversible shell with undo semantics")
-      (synergy "Both prioritize reversibility; FormDB stores, Valence executes"))
+      (synergy "Both prioritize reversibility; FormBD stores, Valence executes"))
 
     (sibling-standard
       (project "anamnesis")
       (relationship "sibling-standard")
       (description "Conversation knowledge extraction")
-      (synergy "FormDB could be the persistent store for anamnesis memories"))
+      (synergy "FormBD could be the persistent store for anamnesis memories"))
 
     (potential-consumer
       (project "gitvisor")
       (relationship "potential-consumer")
       (description "Git repository governance")
-      (synergy "FormDB for storing governance audit trails"))
+      (synergy "FormBD for storing governance audit trails"))
 
     (potential-consumer
       (project "bofig")
       (relationship "potential-consumer")
       (description "Boundary objects and epistemological scoring")
-      (synergy "FormDB for storing scored claims with provenance"))
+      (synergy "FormBD for storing scored claims with provenance"))
 
     (potential-consumer
       (project "claim-forge")
       (relationship "potential-consumer")
       (description "IP registration and timestamping")
-      (synergy "FormDB for immutable claim storage with audit trails"))
+      (synergy "FormBD for immutable claim storage with audit trails"))
 
     (inspiration
       (project "datomic")
       (relationship "inspiration")
       (description "Immutable database with time-based queries")
-      (differentiation "FormDB adds narrative rendering and reversibility guarantees"))
+      (differentiation "FormBD adds narrative rendering and reversibility guarantees"))
 
     (inspiration
       (project "event-sourcing")
       (relationship "inspiration")
       (description "Pattern of storing events, not state")
-      (differentiation "FormDB makes events human/agent readable, not just machine processable")))
+      (differentiation "FormBD makes events human/agent readable, not just machine processable")))
 
   (what-this-is
     "A database where storage internals are designed to be read"

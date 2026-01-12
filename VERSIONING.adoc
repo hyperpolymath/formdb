@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: PMPL-1.0
-= FormDB Versioning & Stability Policy
+= FormBD Versioning & Stability Policy
 :toc: macro
 :toc-title: Contents
 :toclevels: 3
@@ -7,24 +7,24 @@
 :sectnums:
 
 [.lead]
-API stability guarantees, versioning conventions, and compatibility promises for FormDB.
+API stability guarantees, versioning conventions, and compatibility promises for FormBD.
 
 toc::[]
 
 == Overview
 
-FormDB takes stability seriously. As a database designed for long-term archives and audit trails, we understand that your data and queries must remain accessible for years or decades. This document describes our versioning scheme, stability guarantees, and migration policies.
+FormBD takes stability seriously. As a database designed for long-term archives and audit trails, we understand that your data and queries must remain accessible for years or decades. This document describes our versioning scheme, stability guarantees, and migration policies.
 
 [IMPORTANT]
 ====
 **Current Status: Pre-1.0 Development**
 
-FormDB is currently at version **0.0.1** (conceptual + PoC stage). All APIs, formats, and interfaces are subject to change. Once we reach 1.0, the stability guarantees in this document become binding commitments.
+FormBD is currently at version **0.0.1** (conceptual + PoC stage). All APIs, formats, and interfaces are subject to change. Once we reach 1.0, the stability guarantees in this document become binding commitments.
 ====
 
 == Version Numbering
 
-FormDB follows https://semver.org/[Semantic Versioning 2.0.0]:
+FormBD follows https://semver.org/[Semantic Versioning 2.0.0]:
 
 ----
 MAJOR.MINOR.PATCH[-PRERELEASE][+BUILD]
@@ -80,7 +80,7 @@ After 1.0 release:
 
 == Stability Tiers
 
-Each FormDB component is assigned a stability tier that defines its compatibility guarantees.
+Each FormBD component is assigned a stability tier that defines its compatibility guarantees.
 
 === Tier 1: Stable
 
@@ -285,7 +285,7 @@ Each FormDB component is assigned a stability tier that defines its compatibilit
 
 == Format Versioning
 
-FormDB uses internal version numbers for on-disk formats to ensure data remains readable across upgrades.
+FormBD uses internal version numbers for on-disk formats to ensure data remains readable across upgrades.
 
 === Block Format Version
 
@@ -318,7 +318,7 @@ Current: 1
 
 **Journal Replay Guarantee:**
 
-Journals written by any FormDB version can be replayed by any later version. This is a **permanent guarantee**—we will never break journal replay.
+Journals written by any FormBD version can be replayed by any later version. This is a **permanent guarantee**—we will never break journal replay.
 
 === Schema Version
 
@@ -361,8 +361,8 @@ The Zig ABI uses soname versioning:
 
 [source,text]
 ----
-libformdb.so.1      # ABI version 1
-libformdb.so.1.2.3  # Full version
+libformbd.so.1      # ABI version 1
+libformbd.so.1.2.3  # Full version
 ----
 
 ABI changes:
@@ -442,21 +442,21 @@ Deprecated features emit warnings:
 
 === Data Migration
 
-FormDB provides migration tools for format changes:
+FormBD provides migration tools for format changes:
 
 [source,bash]
 ----
 # Check if migration is needed
-formdb doctor --check-version mydb/
+formbd doctor --check-version mydb/
 
 # Backup before migration
-formdb backup mydb/ mydb-backup-$(date +%Y%m%d)/
+formbd backup mydb/ mydb-backup-$(date +%Y%m%d)/
 
 # Run migration
-formdb migrate mydb/ --to-version 2
+formbd migrate mydb/ --to-version 2
 
 # Verify migration
-formdb doctor --verify mydb/
+formbd doctor --verify mydb/
 ----
 
 === Query Migration
@@ -466,13 +466,13 @@ For FQL syntax changes:
 [source,bash]
 ----
 # Check queries for deprecated syntax
-formdb lint --queries queries/*.fql
+formbd lint --queries queries/*.fql
 
 # Auto-fix where possible
-formdb lint --fix --queries queries/*.fql
+formbd lint --fix --queries queries/*.fql
 
 # Generate migration report
-formdb lint --report queries/*.fql > migration-report.md
+formbd lint --report queries/*.fql > migration-report.md
 ----
 
 === Zero-Downtime Migration
@@ -555,14 +555,14 @@ Queries written for older versions continue to work:
 |===
 | Query Version | Runtime Version | Guaranteed
 
-| FQL v1 | FormDB 1.x | Yes
-| FQL v1 | FormDB 2.x | Yes (with version directive)
-| FQL v1 | FormDB 3.x | Yes (with version directive)
+| FQL v1 | FormBD 1.x | Yes
+| FQL v1 | FormBD 2.x | Yes (with version directive)
+| FQL v1 | FormBD 3.x | Yes (with version directive)
 |===
 
 === Journal Replay Guarantee
 
-**Permanent Commitment**: Any journal written by any FormDB version can be replayed by any later version. This enables:
+**Permanent Commitment**: Any journal written by any FormBD version can be replayed by any later version. This enables:
 
 * Point-in-time recovery across upgrades
 * Audit trail preservation
@@ -610,7 +610,7 @@ Queries written for older versions continue to work:
 INTROSPECT VERSION;
 
 {
-  "formdb": "0.0.1",
+  "formbd": "0.0.1",
   "fql": "1",
   "block_format": 1,
   "journal_format": 1,
@@ -638,12 +638,12 @@ INTROSPECT DATABASE;
 
 [source,bash]
 ----
-formdb doctor --compatibility mydb/
+formbd doctor --compatibility mydb/
 
-FormDB Compatibility Report
+FormBD Compatibility Report
 ===========================
 Database created by: 0.0.1
-Current FormDB version: 0.1.0
+Current FormBD version: 0.1.0
 
 Block format: v1 (compatible)
 Journal format: v1 (compatible)

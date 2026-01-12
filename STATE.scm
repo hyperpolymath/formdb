@@ -1,4 +1,4 @@
-;; STATE.scm - FormDB Project State
+;; STATE.scm - FormBD Project State
 ;; Media-Type: application/vnd.state+scm
 
 (state
@@ -7,11 +7,11 @@
     (schema-version "1.0")
     (created "2026-01-03")
     (updated "2026-01-12")
-    (project "formdb")
-    (repo "github.com/hyperpolymath/formdb"))
+    (project "formbd")
+    (repo "github.com/hyperpolymath/formbd"))
 
   (project-context
-    (name "FormDB")
+    (name "FormBD")
     (tagline "The database where the database is part of the story")
     (tech-stack
       (truth-core "Forth")
@@ -30,19 +30,19 @@
       (Form.Normalizer (status "design-complete") (completion 55))
       (Form.ControlPlane (status "deferred-by-decision") (completion 0)))
     (working-features
-      "specification document (formdb.scm)"
+      "specification document (formbd.scm)"
       "repository structure"
       "self-normalizing database spec (spec/self-normalizing.adoc)"
       "block storage format spec (spec/blocks.adoc)"
       "journal format spec (spec/journal.adoc)"
       "blob encoding spec (spec/encoding.adoc)"
-      "FDQL grammar + 10 examples (spec/fql.adoc)"
+      "FBQL grammar + 10 examples (spec/fql.adoc)"
       "Form.Blocks implementation (core-forth/src/blocks.fs)"
       "Journal implementation (core-forth/src/journal.fs)"
       "Form.Model implementation (core-forth/src/model.fs)"
       "Form.Bridge Zig ABI (core-zig/src/bridge.zig)"
       "CBOR encoding (core-zig/src/cbor.zig)"
-      "FDQL parser (core-factor/fdql/fdql.factor)"
+      "FBQL parser (core-factor/fbql/fbql.factor)"
       "FD discovery scaffolding (normalizer/factor/fd-discovery.factor)"
       "Lean 4 FD types (normalizer/lean/FunDep.lean)"
       "Strapi plugin (integrations/strapi/)"
@@ -53,22 +53,22 @@
       "Fuzz testing framework (tests/fuzz/)"
       "CMS integration tests (tests/integration/)"
       "E2E test suite (tests/e2e/)"
-      "Query plan cache (perf/src/FormDB_Perf_Cache.res)"
-      "Connection pooling (perf/src/FormDB_Perf_Pool.res)"
-      "Batch operations (perf/src/FormDB_Perf_Batch.res)"
-      "Performance metrics (perf/src/FormDB_Perf_Metrics.res)"
-      "Configuration validation (stability/src/FormDB_Stability_Config.res)"
-      "Health checks (stability/src/FormDB_Stability_Health.res)"
-      "Graceful shutdown (stability/src/FormDB_Stability_Shutdown.res)"
-      "Production readiness (stability/src/FormDB_Stability_Readiness.res)"
-      "Cluster coordination (distributed/src/FormDB_Distributed_Cluster.res)"
-      "Raft consensus (distributed/src/FormDB_Distributed_Consensus.res)"
-      "Data sharding (distributed/src/FormDB_Distributed_Sharding.res)"
-      "Data replication (distributed/src/FormDB_Distributed_Replication.res)"
-      "Aggregations (analytics/src/FormDB_Analytics_Aggregations.res)"
-      "Time series (analytics/src/FormDB_Analytics_TimeSeries.res)"
-      "Window functions (analytics/src/FormDB_Analytics_Window.res)"
-      "Export formats (analytics/src/FormDB_Analytics_Export.res)"))
+      "Query plan cache (perf/src/FormBD_Perf_Cache.res)"
+      "Connection pooling (perf/src/FormBD_Perf_Pool.res)"
+      "Batch operations (perf/src/FormBD_Perf_Batch.res)"
+      "Performance metrics (perf/src/FormBD_Perf_Metrics.res)"
+      "Configuration validation (stability/src/FormBD_Stability_Config.res)"
+      "Health checks (stability/src/FormBD_Stability_Health.res)"
+      "Graceful shutdown (stability/src/FormBD_Stability_Shutdown.res)"
+      "Production readiness (stability/src/FormBD_Stability_Readiness.res)"
+      "Cluster coordination (distributed/src/FormBD_Distributed_Cluster.res)"
+      "Raft consensus (distributed/src/FormBD_Distributed_Consensus.res)"
+      "Data sharding (distributed/src/FormBD_Distributed_Sharding.res)"
+      "Data replication (distributed/src/FormBD_Distributed_Replication.res)"
+      "Aggregations (analytics/src/FormBD_Analytics_Aggregations.res)"
+      "Time series (analytics/src/FormBD_Analytics_TimeSeries.res)"
+      "Window functions (analytics/src/FormBD_Analytics_Window.res)"
+      "Export formats (analytics/src/FormBD_Analytics_Export.res)"))
 
   (route-to-mvp
     (milestone (id "M1") (name "Specification Complete")
@@ -77,7 +77,7 @@
         (item "Define block header format" (status "complete") (decision "D-BLOCK-HEADER-001"))
         (item "Define journal entry schema" (status "complete") (decision "D-JOURNAL-ENTRY-001"))
         (item "Choose ABI blob encoding" (status "complete") (decision "D-ABI-BLOBS-001"))
-        (item "Define FDQL PoC grammar" (status "complete") (decision "D-FQL-POC-001"))))
+        (item "Define FBQL PoC grammar" (status "complete") (decision "D-FQL-POC-001"))))
     (milestone (id "M2") (name "Form.Blocks PoC")
       (status "complete")
       (items
@@ -101,7 +101,7 @@
     (milestone (id "M5") (name "Form.Runtime PoC")
       (status "complete")
       (items
-        (item "FDQL parser" (status "complete"))
+        (item "FBQL parser" (status "complete"))
         (item "Query planner" (status "partial"))
         (item "EXPLAIN functionality" (status "complete"))
         (item "Provenance surfaces" (status "partial"))))
@@ -111,7 +111,7 @@
         (item "FD discovery algorithm selection" (status "complete") (decision "D-NORM-001"))
         (item "Approximate FD policy" (status "complete") (decision "D-NORM-002"))
         (item "Denormalization support" (status "complete") (decision "D-NORM-003"))
-        (item "FDQL-dt integration" (status "complete") (decision "D-NORM-004"))
+        (item "FBQL-dt integration" (status "complete") (decision "D-NORM-004"))
         (item "Query rewriting strategy" (status "complete") (decision "D-NORM-005"))
         (item "Implement DFD algorithm" (status "scaffolded"))
         (item "DISCOVER DEPENDENCIES command" (status "scaffolded"))
@@ -133,7 +133,7 @@
     (milestone (id "M14") (name "Testing & Verification")
       (status "complete")
       (items
-        (item "Property-based tests for FDQL" (status "complete"))
+        (item "Property-based tests for FBQL" (status "complete"))
         (item "Fuzz testing for parser" (status "complete"))
         (item "CMS integration tests" (status "complete"))
         (item "E2E test suite" (status "complete"))
@@ -194,7 +194,7 @@
     (reference "UNIFIED-ROADMAP.scm")
     (role "Core database engine - critical path item")
     (mvp-blockers
-      "M11: HTTP API Server (blocks Studio M2, Debugger FormDB adapter)")
+      "M11: HTTP API Server (blocks Studio M2, Debugger FormBD adapter)")
     (this-repo-priority
       "Complete M11 HTTP API - highest priority"
       "Expose Form.Bridge FFI for proof verification"
@@ -204,7 +204,7 @@
     (snapshot (date "2026-01-03") (session "initial-setup")
       (accomplishments
         "Created repository"
-        "Added formdb.scm specification"
+        "Added formbd.scm specification"
         "Added README.adoc"
         "Set up RSR-compliant structure"))
     (snapshot (date "2026-01-11") (session "self-normalizing-spec")
@@ -220,17 +220,17 @@
       (accomplishments
         "Created spec/blocks.adoc - 4096-byte blocks, 64-byte header, CRC32C integrity"
         "Created spec/journal.adoc - 48-byte entry header, CBOR payloads, provenance tracking"
-        "Created spec/encoding.adoc - CBOR (RFC 8949) with deterministic encoding, FormDB tags 39001-39008"
+        "Created spec/encoding.adoc - CBOR (RFC 8949) with deterministic encoding, FormBD tags 39001-39008"
         "Created spec/fql.adoc - Full EBNF grammar, 10 canonical examples with expected output"
         "Resolved Q-BLOCK-HEADER-001, Q-JOURNAL-ENTRY-001, Q-ABI-BLOBS-001, Q-FQL-POC-001"
-        "Added decisions D-BLOCK-HEADER-001 through D-FQL-POC-001 to formdb.scm"
+        "Added decisions D-BLOCK-HEADER-001 through D-FQL-POC-001 to formbd.scm"
         "Completed Milestone M1 (Specification Complete)"
         "Project ready for Form.Blocks implementation (M2)"))
     (snapshot (date "2026-01-12") (session "integration-testing")
       (accomplishments
         "Set up development environment (gforth in toolbox, Factor 0.102)"
         "Fixed Forth code compatibility with gforth 64-bit"
-        "Renamed blocks.fs to formdb-blocks.fs to avoid gforth BLOCKS extension conflict"
+        "Renamed blocks.fs to formbd-blocks.fs to avoid gforth BLOCKS extension conflict"
         "Fixed CRC32C function (DO/LOOP return stack conflict)"
         "Fixed 32-bit field access (use l!/l@ instead of !/@ for magic, checksum, etc.)"
         "Fixed block-magic/BLOCK-MAGIC naming collision (renamed to blk-magic)"
@@ -238,15 +238,15 @@
         "Fixed FQL parser consume-token stack effect"
         "Fixed Lean FunDep.lean (List.join -> List.flatten)"
         "Added working justfile recipes (test-forth, check-forth, check-lean)"))
-    (snapshot (date "2026-01-12") (session "fdql-parser-fixes")
+    (snapshot (date "2026-01-12") (session "fbql-parser-fixes")
       (accomplishments
-        "Renamed FQL to FDQL (FormDB Query Language) throughout codebase"
-        "Renamed directory core-factor/fql to core-factor/fdql"
+        "Renamed FQL to FBQL (FormBD Query Language) throughout codebase"
+        "Renamed directory core-factor/fql to core-factor/fbql"
         "Fixed peek-token if-empty branch stack effects"
         "Fixed expect-token stack manipulation (was dropping too many items)"
         "Fixed try-consume branch effects to match properly"
         "Fixed argument ordering in :: functions (tokens before keywords)"
-        "All 10 FDQL statement types now parse correctly"
+        "All 10 FBQL statement types now parse correctly"
         "SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, EXPLAIN, INTROSPECT all working"))
     (snapshot (date "2026-01-13") (session "resolve-design-blockers")
       (accomplishments
@@ -267,7 +267,7 @@
         "Built Directus hook extension"
         "Built Ghost webhook server (Deno runtime)"
         "Built Payload CMS adapter"
-        "All integrations support bidirectional, cms-to-formdb, formdb-to-cms sync modes"
+        "All integrations support bidirectional, cms-to-formbd, formbd-to-cms sync modes"
         "All integrations include provenance metadata for audit trails"
         "Comprehensive integration documentation"
         "Milestone M13 (CMS Integrations) complete"))
@@ -300,9 +300,9 @@
         "Milestone M16 (Final Stabilization) complete"))
     (snapshot (date "2026-01-12") (session "v1-production-release")
       (accomplishments
-        "First production release of FormDB"
+        "First production release of FormBD"
         "All 16 milestones complete (M1-M16)"
-        "Full specification suite (blocks, journal, encoding, FDQL)"
+        "Full specification suite (blocks, journal, encoding, FBQL)"
         "Core implementation (Forth/Factor/Zig)"
         "Multi-protocol API (REST, gRPC, GraphQL, WebSocket)"
         "Client libraries (ReScript, PHP)"

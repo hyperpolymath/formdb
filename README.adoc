@@ -1,4 +1,4 @@
-= FormDB
+= FormBD
 
 image:[License,link="https://github.com/hyperpolymath/palimpsest-license"]
 
@@ -18,7 +18,7 @@ toc::[]
 
 == Overview
 
-FormDB is a *narrative-first, reversible, audit-grade database core*. It treats schemas, constraints, migrations, blocks, and journals as narrative artefacts—the database is part of the story, not an opaque substrate.
+FormBD is a *narrative-first, reversible, audit-grade database core*. It treats schemas, constraints, migrations, blocks, and journals as narrative artefacts—the database is part of the story, not an opaque substrate.
 
 === Core Thesis
 
@@ -46,7 +46,7 @@ FormDB is a *narrative-first, reversible, audit-grade database core*. It treats 
 
 == Architecture
 
-FormDB is structured in layers, each with a specific language and responsibility:
+FormBD is structured in layers, each with a specific language and responsibility:
 
 [source,text]
 ----
@@ -122,9 +122,9 @@ Renderability:: Blocks and journal entries MUST be renderable deterministically 
 Provenance:: All query results can optionally include provenance pointers to journal and blocks.
 Constraints as Ethics:: Constraints are explainable: rejections must return reasons + pointers + narrative rationale.
 
-== FQL (FormDB Query Language)
+== FQL (FormBD Query Language)
 
-FQL is the query language for FormDB—not a "forms" query language, but the native query interface for this narrative-first database.
+FQL is the query language for FormBD—not a "forms" query language, but the native query interface for this narrative-first database.
 
 PoC subset capabilities:
 
@@ -145,7 +145,7 @@ PoC subset capabilities:
 
 [source,text]
 ----
-formdb/
+formbd/
 ├── spec/              # Format specs + rationale (AsciiDoc)
 ├── core-forth/        # Form.Blocks + Form.Model (truth core)
 ├── core-zig/          # Form.Bridge (ABI + port framing)
@@ -168,7 +168,7 @@ formdb/
 
 == Open Questions
 
-See link:formdb.scm[formdb.scm] for structured open questions with acceptance criteria:
+See link:formbd.scm[formbd.scm] for structured open questions with acceptance criteria:
 
 === Core PoC
 * `Q-BLOCK-HEADER-001`: Minimal block header layout
@@ -195,7 +195,7 @@ See link:formdb.scm[formdb.scm] for structured open questions with acceptance cr
 * link:ARCHITECTURE.adoc[Architecture] - Technical architecture deep-dive
 * link:ROADMAP.adoc[Roadmap] - Development roadmap
 * link:PHILOSOPHY.adoc[Philosophy] - Design philosophy and principles
-* link:formdb.scm[formdb.scm] - Machine-readable specification
+* link:formbd.scm[formbd.scm] - Machine-readable specification
 
 === Specifications
 * link:spec/fql.adoc[FQL Specification] - Query language reference
@@ -205,7 +205,7 @@ See link:formdb.scm[formdb.scm] for structured open questions with acceptance cr
 * link:spec/journal.adoc[Journal Format] - Audit log specification
 
 === Operations
-* link:docs/DEPLOYMENT.adoc[Deployment Guide] - Run FormDB in production
+* link:docs/DEPLOYMENT.adoc[Deployment Guide] - Run FormBD in production
 * link:docs/OBSERVABILITY.adoc[Observability] - Monitoring, logging, tracing
 * link:docs/SECURITY-AUTH.adoc[Security & Auth] - Authentication and hardening
 
@@ -215,15 +215,15 @@ See link:formdb.scm[formdb.scm] for structured open questions with acceptance cr
 * link:docs/INTEGRATION-PATTERNS.adoc[Integration Patterns] - Queues, search, analytics
 
 === Domain-Specific
-* link:docs/WP05_interactive_documentary.md[WP05] - FormDB for Interactive Documentary/Journalism
+* link:docs/WP05_interactive_documentary.md[WP05] - FormBD for Interactive Documentary/Journalism
 
 == Related Projects
 
 * https://github.com/hyperpolymath/fqldt[FQLdt] - Dependently-typed FQL (same database, compile-time proofs)
-* https://github.com/hyperpolymath/formdb-studio[FormDB Studio] - Zero-friction GUI for non-technical users
+* https://github.com/hyperpolymath/formbd-studio[FormBD Studio] - Zero-friction GUI for non-technical users
 * https://github.com/hyperpolymath/bofig[BoFIG] - Evidence graph for investigative journalism
-* https://github.com/hyperpolymath/zotero-formdb[Zotero-FormDB] - Post-truth reference manager with PROMPT scores
-* https://github.com/hyperpolymath/formdb-debugger[FormDB Debugger] - Proof-carrying database debugger (Lean 4 + Idris 2)
+* https://github.com/hyperpolymath/zotero-formbd[Zotero-FormBD] - Post-truth reference manager with PROMPT scores
+* https://github.com/hyperpolymath/formbd-debugger[FormBD Debugger] - Proof-carrying database debugger (Lean 4 + Idris 2)
 * https://github.com/hyperpolymath/formbase[FormBase] - Open-source Airtable alternative with provenance
 
 == License

@@ -1,4 +1,4 @@
-= FormDB Roadmap
+= FormBD Roadmap
 :toc:
 :icons: font
 
@@ -33,7 +33,7 @@ Development phases from concept to production.
 
 === Deliverables
 
-* [x] `formdb.scm` - Unified specification
+* [x] `formbd.scm` - Unified specification
 * [x] Repository structure
 * [x] `spec/blocks.adoc` - Block format spec (4 KiB blocks, 64-byte headers)
 * [x] `spec/journal.adoc` - Journal format spec (append-only, sequence numbers)
@@ -51,7 +51,7 @@ Development phases from concept to production.
 
 === Deliverables
 
-* [x] Fixed-size block implementation (`core-forth/src/formdb-blocks.fs`)
+* [x] Fixed-size block implementation (`core-forth/src/formbd-blocks.fs`)
 * [x] Block header structure with magic, version, type, checksums
 * [x] Memory buffer management
 * [x] CRC32C implementation (Castagnoli polynomial)
@@ -64,7 +64,7 @@ Development phases from concept to production.
 
 === Deliverables
 
-* [x] Append-only journal (`core-forth/src/formdb-journal.fs`)
+* [x] Append-only journal (`core-forth/src/formbd-journal.fs`)
 * [x] Sequence numbering
 * [x] Operation logging with inverses
 * [x] Crash recovery primitives
@@ -77,7 +77,7 @@ Development phases from concept to production.
 
 === Deliverables
 
-* [x] Document collection support (`core-forth/src/formdb-model.fs`)
+* [x] Document collection support (`core-forth/src/formbd-model.fs`)
 * [x] Edge collection support
 * [x] Schema metadata storage
 * [x] Constraint storage
@@ -122,7 +122,7 @@ Architecture changed from C ABI to Zig-only ABI for better safety and integratio
 
 === Deliverables
 
-* [x] FDQL parser (`core-factor/fdql/fdql.factor`) - Full PEG-based parser
+* [x] FBQL parser (`core-factor/fbql/fbql.factor`) - Full PEG-based parser
 * [x] Query planner - Cost-based planning with step types
 * [x] Executor - In-memory and pluggable persistent storage
 * [x] EXPLAIN functionality - EXPLAIN, ANALYZE, VERBOSE modes
@@ -178,11 +178,11 @@ See link:spec/self-normalizing.adoc[Self-Normalizing Specification] for full det
 
 === Deliverables
 
-* [x] Seam tests (`core-factor/fdql/seam-tests.factor`) - Full pipeline validation
+* [x] Seam tests (`core-factor/fbql/seam-tests.factor`) - Full pipeline validation
 * [x] End-to-end test suite - Parser → Planner → Executor → Normalizer
-* [x] Performance benchmarks (`core-factor/fdql/benchmarks.factor`)
+* [x] Performance benchmarks (`core-factor/fbql/benchmarks.factor`)
 * [x] Migration tests (`normalizer/factor/migration-tests.factor`)
-* [x] Pluggable storage backend (`core-factor/fdql/storage-backend.factor`)
+* [x] Pluggable storage backend (`core-factor/fbql/storage-backend.factor`)
 
 === Acceptance Criteria
 
@@ -200,9 +200,9 @@ See link:spec/self-normalizing.adoc[Self-Normalizing Specification] for full det
 
 === Deliverables
 
-* [x] API server binary (`formdb-server`) in Zig
+* [x] API server binary (`formbd-server`) in Zig
 * [x] REST API with OpenAPI 3.1 specification (`api/spec/openapi.yaml`)
-* [x] gRPC API with Protocol Buffers (`api/proto/formdb.proto`)
+* [x] gRPC API with Protocol Buffers (`api/proto/formbd.proto`)
 * [x] GraphQL API with SDL schema (`api/graphql/schema.graphql`)
 * [x] WebSocket support for GraphQL subscriptions (`api/src/websocket.zig`)
 * [x] Authentication middleware (JWT, API keys)
@@ -214,7 +214,7 @@ See link:spec/self-normalizing.adoc[Self-Normalizing Specification] for full det
 
 [source]
 ----
-POST   /v1/query              # Execute FDQL query
+POST   /v1/query              # Execute FBQL query
 POST   /v1/collections        # Create collection
 GET    /v1/collections        # List collections
 GET    /v1/collections/{name} # Get collection schema
@@ -232,7 +232,7 @@ GET    /v1/metrics            # Prometheus metrics
 
 [source,protobuf]
 ----
-service FormDB {
+service FormBD {
   rpc Query(QueryRequest) returns (QueryResponse);
   rpc CreateCollection(CreateCollectionRequest) returns (CreateCollectionResponse);
   rpc ListCollections(Empty) returns (ListCollectionsResponse);
@@ -250,12 +250,12 @@ type Query {
   collections: [Collection!]!
   collection(name: String!): Collection
   journal(since: Int, limit: Int): [JournalEntry!]!
-  query(fdql: String!, provenance: ProvenanceInput): QueryResult!
+  query(fbql: String!, provenance: ProvenanceInput): QueryResult!
 }
 
 type Mutation {
   createCollection(name: String!, schema: SchemaInput!): Collection!
-  execute(fdql: String!, provenance: ProvenanceInput!): MutationResult!
+  execute(fbql: String!, provenance: ProvenanceInput!): MutationResult!
   startMigration(collection: String!, target: NormalForm!): Migration!
 }
 
@@ -266,7 +266,7 @@ type Subscription {
 
 === Acceptance Criteria
 
-* ✅ All FDQL operations accessible via REST, gRPC, and GraphQL
+* ✅ All FBQL operations accessible via REST, gRPC, and GraphQL
 * ✅ Provenance tracking across all protocols
 * ✅ Streaming support via WebSocket subscriptions (journal streaming)
 * ✅ OpenAPI, protobuf, and GraphQL SDL specs generate valid clients
@@ -284,7 +284,7 @@ type Subscription {
 
 *Dependencies*: Phase 9 (HTTP API) complete ✅
 
-=== ReScript Client (`@formdb/rescript`)
+=== ReScript Client (`@formbd/rescript`)
 
 * [ ] HTTP client using Fetch API
 * [ ] Type-safe FQL query builder
@@ -295,14 +295,14 @@ type Subscription {
 [source,rescript]
 ----
 // Example usage
-let result = await FormDB.query(
+let result = await FormBD.query(
   ~collection="articles",
   ~where=Field("status", Eq, "published"),
   ~provenance={actor: "editor@news.org", rationale: "Daily review"},
 )
 ----
 
-=== PHP Client (`formdb/formdb-php`)
+=== PHP Client (`formbd/formbd-php`)
 
 * [ ] PSR-18 HTTP client compatibility
 * [ ] Composer package
@@ -314,7 +314,7 @@ let result = await FormDB.query(
 ----
 <?php
 // Example usage
-$result = $formdb->query()
+$result = $formbd->query()
     ->collection('articles')
     ->where('status', '=', 'published')
     ->withProvenance('editor@news.org', 'Daily review')
@@ -323,7 +323,7 @@ $result = $formdb->query()
 
 === Acceptance Criteria
 
-* Both clients pass integration tests against formdb-server
+* Both clients pass integration tests against formbd-server
 * ReScript client works with Deno
 * PHP client installable via Composer
 * Documentation with examples
@@ -332,19 +332,19 @@ $result = $formdb->query()
 
 *Status*: 📋 Planned
 
-*Goal*: WordPress plugin for FormDB-backed content with full provenance.
+*Goal*: WordPress plugin for FormBD-backed content with full provenance.
 
 *Dependencies*: Phase 10 (PHP client) must be complete.
 
 === Deliverables
 
-* [ ] WordPress plugin (`formdb-wordpress`)
-* [ ] Custom post type backed by FormDB
+* [ ] WordPress plugin (`formbd-wordpress`)
+* [ ] Custom post type backed by FormBD
 * [ ] Edit history with provenance (who changed what, why)
 * [ ] Time-travel: view any historical version
 * [ ] Revision comparison with narrative diffs
-* [ ] Admin UI for FormDB connection settings
-* [ ] WP-CLI commands for FormDB operations
+* [ ] Admin UI for FormBD connection settings
+* [ ] WP-CLI commands for FormBD operations
 
 === Features
 
@@ -352,12 +352,12 @@ $result = $formdb->query()
 * **Audit Log**: Complete history visible in admin
 * **Rollback**: Restore any previous version with one click
 * **Evidence Chain**: For journalism, link sources to claims
-* **Multi-site**: Shared FormDB across WordPress network
+* **Multi-site**: Shared FormBD across WordPress network
 
 === Acceptance Criteria
 
 * Plugin installable from WordPress admin
-* Posts stored in FormDB with full provenance
+* Posts stored in FormBD with full provenance
 * Revision history shows narrative explanations
 * Rollback works without data loss
 * Compatible with WordPress 6.x+
@@ -381,8 +381,8 @@ $result = $formdb->query()
 * Additional language bindings (Rust, Python via HTTP)
 * IDE integration (VS Code, JetBrains)
 * Visualization tools
-* FormDB Studio (zero-friction GUI)
-* FormDB Debugger (proof-carrying debugger)
+* FormBD Studio (zero-friction GUI)
+* FormBD Debugger (proof-carrying debugger)
 * Other CMS integrations (Drupal, Ghost, Strapi)
 
 == Non-Goals (Explicitly Deferred)

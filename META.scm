@@ -1,4 +1,4 @@
-;; META.scm - FormDB Meta-Level Information
+;; META.scm - FormBD Meta-Level Information
 ;; Media-Type: application/meta+scheme
 ;; Spec: spec/META-FORMAT-SPEC.adoc
 

@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to FormDB will be documented in this file.
+All notable changes to FormBD will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -11,9 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.0] - 2026-01-12
 
-**FormDB 2.0.0 - Feature-Complete Major Release**
+**FormBD 2.0.0 - Feature-Complete Major Release**
 
-This release marks a major milestone: all 18 milestones complete, representing the feature-complete vision of FormDB as a narrative-first, self-normalizing database.
+This release marks a major milestone: all 18 milestones complete, representing the feature-complete vision of FormBD as a narrative-first, self-normalizing database.
 
 ### Highlights
 
@@ -44,7 +44,7 @@ This release marks a major milestone: all 18 milestones complete, representing t
 | Category | Features |
 |----------|----------|
 | **Storage** | 4KiB blocks, CRC32C integrity, append-only journal |
-| **Query** | FDQL language, query planner, EXPLAIN modes |
+| **Query** | FBQL language, query planner, EXPLAIN modes |
 | **Normalization** | DFD discovery, 1NF-BCNF analysis, three-phase migration |
 | **API** | REST, gRPC, GraphQL, WebSocket subscriptions |
 | **Distributed** | Cluster, Raft consensus, sharding, replication |
@@ -61,7 +61,7 @@ None - v2.0.0 maintains backward compatibility with the v1.x series.
 
 ### Thank You
 
-FormDB 2.0.0 represents the complete realization of the narrative-first database vision. Every schema change, every constraint, every migration is now a story that can be told, verified, and understood.
+FormBD 2.0.0 represents the complete realization of the narrative-first database vision. Every schema change, every constraint, every migration is now a story that can be told, verified, and understood.
 
 ---
 
@@ -69,32 +69,32 @@ FormDB 2.0.0 represents the complete realization of the narrative-first database
 
 Advanced Analytics milestone: **M18 Complete**
 
-This release adds comprehensive analytics capabilities to FormDB.
+This release adds comprehensive analytics capabilities to FormBD.
 
 ### Added
 
-#### Aggregations (`analytics/src/FormDB_Analytics_Aggregations.res`)
+#### Aggregations (`analytics/src/FormBD_Analytics_Aggregations.res`)
 - Statistical aggregations: Count, Sum, Avg, Min, Max
 - Advanced: Median, Stddev, Variance, Percentile
 - CountDistinct for unique value counting
 - Group by with multiple aggregations
 - Numeric value extraction from JSON
 
-#### Time Series (`analytics/src/FormDB_Analytics_TimeSeries.res`)
+#### Time Series (`analytics/src/FormBD_Analytics_TimeSeries.res`)
 - Time bucketing (Second to Year granularity)
 - Trend analysis with linear regression
 - Moving average calculation
 - Anomaly detection using standard deviation
 - R-squared and slope metrics
 
-#### Window Functions (`analytics/src/FormDB_Analytics_Window.res`)
+#### Window Functions (`analytics/src/FormBD_Analytics_Window.res`)
 - Ranking: RowNumber, Rank, DenseRank, PercentRank, Ntile
 - Navigation: Lag, Lead, FirstValue, LastValue, NthValue
 - Running calculations: CumulativeSum, RunningAvg
 - Partition by and order by support
 - Configurable frame boundaries
 
-#### Visualization Export (`analytics/src/FormDB_Analytics_Export.res`)
+#### Visualization Export (`analytics/src/FormBD_Analytics_Export.res`)
 - CSV export with configurable options
 - JSON export for APIs
 - Chart.js configuration export
@@ -118,32 +118,32 @@ This release adds comprehensive analytics capabilities to FormDB.
 
 Distributed Mode milestone: **M17 Complete**
 
-This release adds distributed computing capabilities to FormDB.
+This release adds distributed computing capabilities to FormBD.
 
 ### Added
 
-#### Cluster Coordination (`distributed/src/FormDB_Distributed_Cluster.res`)
+#### Cluster Coordination (`distributed/src/FormBD_Distributed_Cluster.res`)
 - Node discovery and membership management
 - Node status tracking (Starting, Joining, Active, Leaving, Down)
 - Node roles (Leader, Follower, Candidate)
 - Cluster state versioning
 - JSON serialization for cluster state
 
-#### Raft Consensus (`distributed/src/FormDB_Distributed_Consensus.res`)
+#### Raft Consensus (`distributed/src/FormBD_Distributed_Consensus.res`)
 - Leader election with term tracking
 - Log replication with entry types (Command, Configuration, NoOp)
 - Vote request/response handling
 - Append entries request/response handling
 - Election timeout detection
 
-#### Data Sharding (`distributed/src/FormDB_Distributed_Sharding.res`)
+#### Data Sharding (`distributed/src/FormBD_Distributed_Sharding.res`)
 - Consistent hashing with virtual nodes
 - Multiple sharding strategies (Hash, Range, Directory)
 - Shard status tracking (Initializing, Active, Migrating, Inactive)
 - Node-to-shard mapping
 - Shard statistics
 
-#### Data Replication (`distributed/src/FormDB_Distributed_Replication.res`)
+#### Data Replication (`distributed/src/FormBD_Distributed_Replication.res`)
 - Configurable consistency levels (One, Quorum, All, LocalQuorum)
 - Replication modes (Synchronous, Asynchronous, SemiSync)
 - Replication event queue
@@ -164,11 +164,11 @@ This release adds distributed computing capabilities to FormDB.
 
 ## [1.0.0] - 2026-01-12
 
-**FormDB 1.0.0 - First Production Release**
+**FormBD 1.0.0 - First Production Release**
 
 🎉 The database where the database is part of the story.
 
-This release marks the first stable, production-ready version of FormDB - a narrative-first database where schemas, constraints, migrations, blocks, and journals are treated as narrative artefacts.
+This release marks the first stable, production-ready version of FormBD - a narrative-first database where schemas, constraints, migrations, blocks, and journals are treated as narrative artefacts.
 
 ### Highlights
 
@@ -191,7 +191,7 @@ This release marks the first stable, production-ready version of FormDB - a narr
 - Crash recovery and replay semantics
 - Provenance tracking for audit trails
 
-#### Query Language (FDQL)
+#### Query Language (FBQL)
 - SELECT, INSERT, UPDATE, DELETE operations
 - CREATE, DROP for schema management
 - EXPLAIN, INTROSPECT for debugging
@@ -223,10 +223,10 @@ This release marks the first stable, production-ready version of FormDB - a narr
 #### CMS Integrations
 | CMS | Type | Sync Modes |
 |-----|------|------------|
-| Strapi | Plugin | Bidirectional, CMS→FormDB, FormDB→CMS |
-| Directus | Hook Extension | Bidirectional, CMS→FormDB, FormDB→CMS |
-| Ghost | Webhook Server | Bidirectional, CMS→FormDB, FormDB→CMS |
-| Payload | Adapter | Bidirectional, CMS→FormDB, FormDB→CMS |
+| Strapi | Plugin | Bidirectional, CMS→FormBD, FormBD→CMS |
+| Directus | Hook Extension | Bidirectional, CMS→FormBD, FormBD→CMS |
+| Ghost | Webhook Server | Bidirectional, CMS→FormBD, FormBD→CMS |
+| Payload | Adapter | Bidirectional, CMS→FormBD, FormBD→CMS |
 
 ### Quality & Reliability
 
@@ -261,7 +261,7 @@ For projects using pre-1.0 versions:
 
 ### Thank You
 
-FormDB represents a new approach to databases - one where the database itself becomes part of the story your data tells. Thank you to everyone who contributed to making this release possible.
+FormBD represents a new approach to databases - one where the database itself becomes part of the story your data tells. Thank you to everyone who contributed to making this release possible.
 
 ---
 
@@ -273,28 +273,28 @@ This release completes Milestone M16, the final stabilization before the 1.0.0 p
 
 ### Added
 
-#### Configuration Validation (`stability/src/FormDB_Stability_Config.res`)
+#### Configuration Validation (`stability/src/FormBD_Stability_Config.res`)
 - Type-safe configuration schema
 - Environment-specific validation rules
 - Production security enforcement (API key, CORS)
 - Environment variable loading
 - Validation error formatting
 
-#### Health Checks (`stability/src/FormDB_Stability_Health.res`)
+#### Health Checks (`stability/src/FormBD_Stability_Health.res`)
 - Component health monitoring (Healthy/Degraded/Unhealthy)
 - Extensible health check registry
 - Built-in checks: memory, storage, bridge
 - Latency tracking per component
 - JSON export for Kubernetes probes
 
-#### Graceful Shutdown (`stability/src/FormDB_Stability_Shutdown.res`)
+#### Graceful Shutdown (`stability/src/FormBD_Stability_Shutdown.res`)
 - Coordinated shutdown sequence
 - Priority-based handler execution
 - Four shutdown phases: DrainConnections → FlushBuffers → CloseResources → Terminated
 - Configurable timeout
 - Status reporting
 
-#### Production Readiness (`stability/src/FormDB_Stability_Readiness.res`)
+#### Production Readiness (`stability/src/FormBD_Stability_Readiness.res`)
 - Pre-flight checks across 5 categories:
   - Security: API key, CORS, TLS
   - Performance: Pool size, query cache
@@ -324,37 +324,37 @@ This release completes Milestone M15, delivering production-ready performance fe
 
 ### Added
 
-#### Query Plan Cache (`perf/src/FormDB_Perf_Cache.res`)
+#### Query Plan Cache (`perf/src/FormBD_Perf_Cache.res`)
 - LRU cache with TTL-based expiration
 - Configurable max size and TTL
 - Cache hit/miss statistics
 - Thread-safe entry management
 - Automatic stale entry cleanup
 
-#### Connection Pool (`perf/src/FormDB_Perf_Pool.res`)
+#### Connection Pool (`perf/src/FormBD_Perf_Pool.res`)
 - Connection pooling with min/max sizing
 - Idle timeout and automatic cleanup
 - Acquire timeout with waiting queue
 - Pool statistics (total, idle, in-use, waiting)
 - Connection health management
 
-#### Batch Operations (`perf/src/FormDB_Perf_Batch.res`)
+#### Batch Operations (`perf/src/FormBD_Perf_Batch.res`)
 - Batch insert, update, delete operations
 - Configurable batch size and flush intervals
 - Retry on failure with max retries
 - Auto-flush when batch size limit reached
 - Error tracking per operation
 
-#### Performance Metrics (`perf/src/FormDB_Perf_Metrics.res`)
+#### Performance Metrics (`perf/src/FormBD_Perf_Metrics.res`)
 - Prometheus-compatible metric export
 - Counter and Gauge metric types
 - Timer context for latency measurement
 - Pre-defined metrics:
-  - `formdb_query_total` - Total queries executed
-  - `formdb_query_latency_ms` - Last query latency
-  - `formdb_cache_hits_total` / `formdb_cache_misses_total`
-  - `formdb_connection_pool_size` / `formdb_active_connections`
-  - `formdb_batch_size` / `formdb_errors_total`
+  - `formbd_query_total` - Total queries executed
+  - `formbd_query_latency_ms` - Last query latency
+  - `formbd_cache_hits_total` / `formbd_cache_misses_total`
+  - `formbd_connection_pool_size` / `formbd_active_connections`
+  - `formbd_batch_size` / `formbd_errors_total`
 
 #### Documentation
 - `perf/README.md` - Comprehensive performance module documentation
@@ -377,7 +377,7 @@ This release completes Milestone M14, delivering a comprehensive testing framewo
 ### Added
 
 #### Property-Based Tests (`tests/property/`)
-- Random FDQL statement generators
+- Random FBQL statement generators
 - Structural property verification
 - Configurable iterations and seed
 - Property test runner with result tracking
@@ -386,7 +386,7 @@ This release completes Milestone M14, delivering a comprehensive testing framewo
 - Multiple mutation strategies (BitFlip, ByteFlip, Dictionary, etc.)
 - Corpus-based fuzzing with seed inputs
 - Crash and interesting input detection
-- FDQL parser fuzz targets
+- FBQL parser fuzz targets
 
 #### Integration Tests (`tests/integration/`)
 - Strapi plugin tests (9 test cases)
@@ -425,7 +425,7 @@ This release completes Milestone M13, delivering official CMS integration plugin
 
 - **Strapi Plugin** (`integrations/strapi/`)
   - Strapi v4/v5 plugin written in ReScript
-  - Real-time content sync to FormDB
+  - Real-time content sync to FormBD
   - Lifecycle hooks: afterCreate, afterUpdate, afterDelete
   - Collection mapping with configurable sync modes
   - Field exclusion support for sensitive data
@@ -437,7 +437,7 @@ This release completes Milestone M13, delivering official CMS integration plugin
   - Action handlers for items.create, items.update, items.delete
   - Environment-based configuration
   - Selective collection sync via FORMDB_SYNC_COLLECTIONS
-  - FormDB client with FDQL query execution
+  - FormBD client with FBQL query execution
 
 - **Ghost Integration** (`integrations/ghost/`)
   - Webhook server for Ghost CMS (Deno runtime)
@@ -459,12 +459,12 @@ This release completes Milestone M13, delivering official CMS integration plugin
 | Mode | Description |
 |------|-------------|
 | `bidirectional` | Sync changes both ways |
-| `cms-to-formdb` | Only sync CMS changes to FormDB |
-| `formdb-to-cms` | Only sync FormDB changes to CMS |
+| `cms-to-formbd` | Only sync CMS changes to FormBD |
+| `formbd-to-cms` | Only sync FormBD changes to CMS |
 
 #### Provenance Tracking
 
-All integrations add provenance metadata to FormDB:
+All integrations add provenance metadata to FormBD:
 ```json
 {
   "actor": "strapi-plugin",
@@ -505,7 +505,7 @@ This release completes Milestone M12, delivering official client libraries for R
   - Full type definitions: Provenance, QueryResult, Collection, JournalEntry
   - Fluent query builder with type-safe WHERE clauses
   - Filter expressions: Field, And, Or, Not
-  - Support for all FDQL operations (SELECT, INSERT, UPDATE, DELETE)
+  - Support for all FBQL operations (SELECT, INSERT, UPDATE, DELETE)
   - Collection management (list, create, delete)
   - Journal access with filtering
   - Normalization operations (discover dependencies, analyze normal form)
@@ -523,13 +523,13 @@ This release completes Milestone M12, delivering official client libraries for R
   - Filter classes: FieldFilter, AndFilter, OrFilter, NotFilter with CompareOp enum
   - All comparison operators: =, !=, <, <=, >, >=, LIKE, IN
   - Framework integration examples: Laravel, Symfony
-  - FormDBException with error codes and details
+  - FormBDException with error codes and details
   - Environment-based configuration
 
 #### SDK Generator (`tools/sdk-gen/`)
 
 - API specification in ReScript (`ApiSpec.res`)
-  - Full FormDB REST API model
+  - Full FormBD REST API model
   - Type definitions, endpoints, parameters
   - HTTP methods, request/response types
 
@@ -597,7 +597,7 @@ This release completes Milestone M11, delivering a production-ready multi-protoc
   - Journal streaming subscription type
 
 - **Form.Bridge Integration** (`api/src/bridge_client.zig`)
-  - FFI bindings to core FormDB engine
+  - FFI bindings to core FormBD engine
   - CBOR encoding for all operations
   - Graceful degraded mode when bridge unavailable
   - Health check, query execution, collection management
@@ -614,7 +614,7 @@ This release completes Milestone M11, delivering a production-ready multi-protoc
 
 #### Ecosystem Coordination
 - **UNIFIED-ROADMAP.scm** - Cross-repo roadmap for MVP 1.0.0
-  - Dependency graph for FormDB, FQLdt, Studio, Debugger
+  - Dependency graph for FormBD, FQLdt, Studio, Debugger
   - Critical path phases P1-P3
   - Post-MVP roadmap (1.1.0, 1.2.0, 2.0.0)
   - Success metrics and quality gates
@@ -635,7 +635,7 @@ This release completes Milestones M8-M10, delivering a fully functional query en
 ### Added
 
 #### Form.Runtime (M8) - Query Engine
-- **FDQL Parser** (`core-factor/fdql/fdql.factor`)
+- **FBQL Parser** (`core-factor/fbql/fbql.factor`)
   - Full PEG-based parser for FQL statements
   - Support for SELECT, INSERT, UPDATE, DELETE, CREATE, DROP
   - EXPLAIN, INTROSPECT statements
@@ -707,13 +707,13 @@ This release completes Milestones M8-M10, delivering a fully functional query en
   - Build configuration for FormNormalizer library
 
 #### Production Hardening (M10)
-- **Seam Tests** (`core-factor/fdql/seam-tests.factor`)
+- **Seam Tests** (`core-factor/fbql/seam-tests.factor`)
   - End-to-end pipeline validation: Parser → Planner → Executor → Normalizer
   - EXPLAIN correlation tests
   - Error propagation tests
   - Large dataset stress tests
 
-- **Benchmarks** (`core-factor/fdql/benchmarks.factor`)
+- **Benchmarks** (`core-factor/fbql/benchmarks.factor`)
   - Parser performance benchmarks
   - Planner performance benchmarks
   - Executor benchmarks (SELECT, INSERT, UPDATE with varying data sizes)
@@ -723,14 +723,14 @@ This release completes Milestones M8-M10, delivering a fully functional query en
   - Memory estimation utilities
   - Quick benchmark for CI regression detection
 
-- **Storage Backend** (`core-factor/fdql/storage-backend.factor`)
+- **Storage Backend** (`core-factor/fbql/storage-backend.factor`)
   - Pluggable storage abstraction
   - Memory backend (default, for testing)
   - Bridge backend (persistent storage via Form.Bridge)
   - Runtime backend selection
 
 #### Ecosystem Alignment
-- Updated ECOSYSTEM.scm with alignment status for fdql-dt and formdb-debugger
+- Updated ECOSYSTEM.scm with alignment status for fbql-dt and formbd-debugger
 - Cross-repo STATE.scm synchronization with integration points
 - Documented FFI compatibility (CBOR proof blobs)
 - Identified alignment gaps for future work
@@ -780,7 +780,7 @@ This release completes Milestone M7, providing comprehensive documentation for p
 
 Major milestone release: **Core Specifications Complete + PoC Implementation**
 
-This release completes Milestones M1-M6, establishing FormDB as a functional proof-of-concept.
+This release completes Milestones M1-M6, establishing FormBD as a functional proof-of-concept.
 
 ### Added
 
@@ -824,19 +824,19 @@ This release completes Milestones M1-M6, establishing FormDB as a functional pro
   - Constraints as ethics
 
 #### Forth Implementation (M2-M5)
-- **Form.Blocks** (`core-forth/src/formdb-blocks.fs`)
+- **Form.Blocks** (`core-forth/src/formbd-blocks.fs`)
   - Fixed-size block storage layer
   - Block header structure with magic, version, type, checksums
   - Memory buffer management
   - CRC32C implementation (Castagnoli polynomial)
 
-- **Form.Journal** (`core-forth/src/formdb-journal.fs`)
+- **Form.Journal** (`core-forth/src/formbd-journal.fs`)
   - Append-only journal implementation
   - Sequence numbering
   - Operation logging with inverses
   - Crash recovery primitives
 
-- **Form.Model** (`core-forth/src/formdb-model.fs`)
+- **Form.Model** (`core-forth/src/formbd-model.fs`)
   - Document collection support
   - Edge collection support
   - Schema metadata storage
@@ -856,10 +856,10 @@ This release completes Milestones M1-M6, establishing FormDB as a functional pro
 
 #### Ecosystem Integration
 - Related projects documentation:
-  - FormDB Studio (zero-friction GUI)
-  - FormDB Debugger (proof-carrying debugger)
+  - FormBD Studio (zero-friction GUI)
+  - FormBD Debugger (proof-carrying debugger)
   - FormBase (Airtable alternative)
-  - Zotero-FormDB (reference manager)
+  - Zotero-FormBD (reference manager)
   - FQLdt (dependently-typed FQL)
 
 #### Machine-Readable Artefacts
@@ -874,7 +874,7 @@ This release completes Milestones M1-M6, establishing FormDB as a functional pro
 ### Changed
 - Eliminated C dependency in favor of Zig-only ABI (Form.Bridge)
 - Consolidated FQLdt specification into single comprehensive document
-- Clarified that FQL = FormDB Query Language (not "forms" query language)
+- Clarified that FQL = FormBD Query Language (not "forms" query language)
 
 ### Security
 - Fixed workflow security issues (ERR-WF-008, ERR-WF-009)
@@ -942,27 +942,27 @@ No breaking changes from 0.0.1. This release adds specifications and implementat
 
 ### Pre-1.0 Warning
 
-FormDB is in pre-1.0 development. APIs, formats, and interfaces may change without deprecation warnings. See [VERSIONING.adoc](VERSIONING.adoc) for stability guarantees.
+FormBD is in pre-1.0 development. APIs, formats, and interfaces may change without deprecation warnings. See [VERSIONING.adoc](VERSIONING.adoc) for stability guarantees.
 
 ---
 
 ## Links
 
-[Unreleased]: https://github.com/hyperpolymath/formdb/compare/v2.0.0...HEAD
-[2.0.0]: https://github.com/hyperpolymath/formdb/compare/v1.2.0...v2.0.0
-[1.2.0]: https://github.com/hyperpolymath/formdb/compare/v1.1.0...v1.2.0
-[1.1.0]: https://github.com/hyperpolymath/formdb/compare/v1.0.0...v1.1.0
-[1.0.0]: https://github.com/hyperpolymath/formdb/compare/v0.0.10...v1.0.0
-[0.0.10]: https://github.com/hyperpolymath/formdb/compare/v0.0.9...v0.0.10
-[0.0.9]: https://github.com/hyperpolymath/formdb/compare/v0.0.8...v0.0.9
-[0.0.8]: https://github.com/hyperpolymath/formdb/compare/v0.0.7...v0.0.8
-[0.0.7]: https://github.com/hyperpolymath/formdb/compare/v0.0.6...v0.0.7
-[0.0.6]: https://github.com/hyperpolymath/formdb/compare/v0.0.5...v0.0.6
-[0.0.5]: https://github.com/hyperpolymath/formdb/compare/v0.0.4...v0.0.5
-[0.0.4]: https://github.com/hyperpolymath/formdb/compare/v0.0.3...v0.0.4
-[0.0.3]: https://github.com/hyperpolymath/formdb/compare/v0.0.2...v0.0.3
-[0.0.2]: https://github.com/hyperpolymath/formdb/compare/v0.0.1...v0.0.2
-[0.0.1]: https://github.com/hyperpolymath/formdb/releases/tag/v0.0.1
+[Unreleased]: https://github.com/hyperpolymath/formbd/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/hyperpolymath/formbd/compare/v1.2.0...v2.0.0
+[1.2.0]: https://github.com/hyperpolymath/formbd/compare/v1.1.0...v1.2.0
+[1.1.0]: https://github.com/hyperpolymath/formbd/compare/v1.0.0...v1.1.0
+[1.0.0]: https://github.com/hyperpolymath/formbd/compare/v0.0.10...v1.0.0
+[0.0.10]: https://github.com/hyperpolymath/formbd/compare/v0.0.9...v0.0.10
+[0.0.9]: https://github.com/hyperpolymath/formbd/compare/v0.0.8...v0.0.9
+[0.0.8]: https://github.com/hyperpolymath/formbd/compare/v0.0.7...v0.0.8
+[0.0.7]: https://github.com/hyperpolymath/formbd/compare/v0.0.6...v0.0.7
+[0.0.6]: https://github.com/hyperpolymath/formbd/compare/v0.0.5...v0.0.6
+[0.0.5]: https://github.com/hyperpolymath/formbd/compare/v0.0.4...v0.0.5
+[0.0.4]: https://github.com/hyperpolymath/formbd/compare/v0.0.3...v0.0.4
+[0.0.3]: https://github.com/hyperpolymath/formbd/compare/v0.0.2...v0.0.3
+[0.0.2]: https://github.com/hyperpolymath/formbd/compare/v0.0.1...v0.0.2
+[0.0.1]: https://github.com/hyperpolymath/formbd/releases/tag/v0.0.1
 
 ## Related Documentation
 

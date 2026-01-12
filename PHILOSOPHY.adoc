@@ -1,20 +1,20 @@
-= FormDB Philosophy
+= FormBD Philosophy
 :toc:
 :icons: font
 
 [.lead]
-The principles and values that guide FormDB's design.
+The principles and values that guide FormBD's design.
 
 == Core Thesis
 
 [quote]
 Schemas, constraints, migrations, blocks, and journals are narrative artefacts. The database is part of the story, not an opaque substrate.
 
-Traditional databases hide their internals. FormDB exposes them as readable, auditable artefacts.
+Traditional databases hide their internals. FormBD exposes them as readable, auditable artefacts.
 
 == Value Hierarchy
 
-FormDB explicitly prioritizes certain values over others:
+FormBD explicitly prioritizes certain values over others:
 
 === Auditability > Performance
 
@@ -104,7 +104,7 @@ Every action the database takes should be visible and reversible.
 
 === Feature Creep
 
-FormDB will never be a drop-in PostgreSQL replacement.
+FormBD will never be a drop-in PostgreSQL replacement.
 
 We serve specific use cases (journalism, compliance, archives, agents) extremely well, rather than serving all use cases poorly.
 
@@ -126,7 +126,7 @@ Where AI agents need to understand and reason about data state, not just query i
 
 Who measure success in decades, not milliseconds.
 
-== What FormDB Is Not
+== What FormBD Is Not
 
 * A performance-optimized OLTP database
 * A SQL database with extra features
@@ -135,7 +135,7 @@ Who measure success in decades, not milliseconds.
 
 == Conclusion
 
-FormDB exists because we believe:
+FormBD exists because we believe:
 
 1. Databases should be readable
 2. History should be preserved
