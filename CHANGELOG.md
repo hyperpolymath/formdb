@@ -9,6 +9,62 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [2.0.0] - 2026-01-12
+
+**FormDB 2.0.0 - Feature-Complete Major Release**
+
+This release marks a major milestone: all 18 milestones complete, representing the feature-complete vision of FormDB as a narrative-first, self-normalizing database.
+
+### Highlights
+
+- **18 Milestones Complete** - From M1 (Specification) through M18 (Advanced Analytics)
+- **Distributed Mode** - Full cluster coordination, Raft consensus, sharding, and replication
+- **Advanced Analytics** - Statistical aggregations, time series analysis, window functions
+- **Production Hardened** - Health checks, graceful shutdown, configuration validation
+- **Multi-Protocol API** - REST, gRPC, GraphQL, WebSocket
+- **CMS Integrations** - Strapi, Directus, Ghost, Payload
+- **Client Libraries** - ReScript, PHP with full SDK generator
+
+### What's New Since 1.0.0
+
+#### Distributed Computing (v1.1.0)
+- Cluster coordination with node discovery and membership
+- Raft consensus for leader election and log replication
+- Consistent hashing with virtual nodes for data sharding
+- Configurable consistency levels (One, Quorum, All)
+
+#### Advanced Analytics (v1.2.0)
+- Statistical aggregations (sum, avg, stddev, percentile, etc.)
+- Time series analysis with trend detection and anomaly detection
+- SQL-style window functions (Rank, Lag, Lead, CumulativeSum)
+- Visualization exports (CSV, JSON, Chart.js, Vega-Lite, D3)
+
+### Complete Feature Set
+
+| Category | Features |
+|----------|----------|
+| **Storage** | 4KiB blocks, CRC32C integrity, append-only journal |
+| **Query** | FDQL language, query planner, EXPLAIN modes |
+| **Normalization** | DFD discovery, 1NF-BCNF analysis, three-phase migration |
+| **API** | REST, gRPC, GraphQL, WebSocket subscriptions |
+| **Distributed** | Cluster, Raft consensus, sharding, replication |
+| **Analytics** | Aggregations, time series, window functions, exports |
+| **Performance** | Query cache, connection pool, batch operations, metrics |
+| **Stability** | Config validation, health checks, graceful shutdown |
+| **Clients** | ReScript, PHP with SDK generator |
+| **CMS** | Strapi, Directus, Ghost, Payload integrations |
+| **Testing** | Property-based, fuzz, integration, E2E |
+
+### Breaking Changes
+
+None - v2.0.0 maintains backward compatibility with the v1.x series.
+
+### Thank You
+
+FormDB 2.0.0 represents the complete realization of the narrative-first database vision. Every schema change, every constraint, every migration is now a story that can be told, verified, and understood.
+
+---
+
 ## [1.2.0] - 2026-01-12
 
 Advanced Analytics milestone: **M18 Complete**
@@ -859,6 +915,7 @@ Initial release: **Repository Initialization**
 
 | Version | Date | Milestone | Key Features |
 |---------|------|-----------|--------------|
+| 2.0.0 | 2026-01-12 | **Feature-Complete** | All 18 milestones, distributed + analytics |
 | 1.2.0 | 2026-01-12 | M18 Complete | Aggregations, time series, window functions, exports |
 | 1.1.0 | 2026-01-12 | M17 Complete | Cluster, consensus, sharding, replication |
 | 1.0.0 | 2026-01-12 | **Production** | First stable release, all M1-M16 complete |
@@ -891,7 +948,8 @@ FormDB is in pre-1.0 development. APIs, formats, and interfaces may change witho
 
 ## Links
 
-[Unreleased]: https://github.com/hyperpolymath/formdb/compare/v1.2.0...HEAD
+[Unreleased]: https://github.com/hyperpolymath/formdb/compare/v2.0.0...HEAD
+[2.0.0]: https://github.com/hyperpolymath/formdb/compare/v1.2.0...v2.0.0
 [1.2.0]: https://github.com/hyperpolymath/formdb/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/hyperpolymath/formdb/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/hyperpolymath/formdb/compare/v0.0.10...v1.0.0
