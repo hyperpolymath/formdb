@@ -118,6 +118,16 @@
       "Implement DISCOVER DEPENDENCIES command"
       "Implement three-phase migration framework"))
 
+  (unified-roadmap
+    (reference "UNIFIED-ROADMAP.scm")
+    (role "Core database engine - critical path item")
+    (mvp-blockers
+      "M11: HTTP API Server (blocks Studio M2, Debugger FormDB adapter)")
+    (this-repo-priority
+      "Complete M11 HTTP API - highest priority"
+      "Expose Form.Bridge FFI for proof verification"
+      "Add CBOR proof blob acceptance"))
+
   (session-history
     (snapshot (date "2026-01-03") (session "initial-setup")
       (accomplishments

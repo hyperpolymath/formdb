@@ -8,6 +8,7 @@ const std = @import("std");
 const json = std.json;
 const config = @import("config.zig");
 const bridge = @import("bridge_client.zig");
+const websocket = @import("websocket.zig");
 
 const log = std.log.scoped(.graphql);
 
@@ -16,9 +17,13 @@ pub fn handleRequest(
     request: *std.http.Server.Request,
     cfg: *const config.Config,
 ) !void {
-    _ = cfg;
-
     const method = request.head.method;
+
+    // Check for WebSocket upgrade (for subscriptions)
+    if (websocket.isUpgradeRequest(request)) {
+        try websocket.handleUpgrade(allocator, request, cfg);
+        return;
+    }
 
     switch (method) {
         .GET => try handleGraphiQL(request),
