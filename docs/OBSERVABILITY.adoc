@@ -1,0 +1,136 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+= FormDB Observability Guide
+:toc:
+:icons: font
+
+[.lead]
+Monitoring, logging, tracing, and operational visibility for FormDB.
+
+[NOTE]
+====
+**Status: Work in Progress**
+
+Observability features are planned for post-PoC phases.
+====
+
+== Overview
+
+FormDB's audit-first design means observability is built into the core:
+
+* **Journal**: Complete history of all mutations
+* **Provenance**: Who did what and why
+* **Introspection**: Query the database about itself
+
+== Logging
+
+=== Log Levels
+
+[cols="1,2"]
+|===
+| Level | Description
+
+| ERROR | Unrecoverable errors, constraint violations
+| WARN | Recoverable issues, deprecation warnings
+| INFO | Operations, queries, lifecycle events
+| DEBUG | Detailed internal state
+| TRACE | Very verbose, for development only
+|===
+
+=== Log Format
+
+_Structured logging format coming soon._
+
+[source,json]
+----
+{
+  "timestamp": "2026-01-12T10:00:00.000000Z",
+  "level": "INFO",
+  "component": "Form.Runtime",
+  "operation": "INSERT",
+  "collection": "evidence",
+  "sequence": 1001,
+  "actor": "alice",
+  "duration_ms": 12
+}
+----
+
+== Metrics
+
+=== Planned Metrics
+
+[cols="1,1,2"]
+|===
+| Metric | Type | Description
+
+| `formdb_queries_total` | Counter | Total queries executed
+| `formdb_query_duration_seconds` | Histogram | Query latency
+| `formdb_journal_entries_total` | Counter | Journal entries written
+| `formdb_constraint_violations_total` | Counter | Constraint failures
+| `formdb_storage_bytes` | Gauge | Storage used
+|===
+
+=== Prometheus Integration
+
+_Coming soon._
+
+=== OpenTelemetry Integration
+
+_Coming soon._
+
+== Tracing
+
+=== Distributed Tracing
+
+FormDB will support OpenTelemetry tracing for:
+
+* Query execution spans
+* Journal write spans
+* Constraint check spans
+* Cross-service correlation
+
+== Health Checks
+
+=== Endpoints (Planned)
+
+[cols="1,2"]
+|===
+| Endpoint | Description
+
+| `/health` | Basic liveness check
+| `/health/ready` | Readiness (can accept queries)
+| `/health/journal` | Journal subsystem health
+| `/health/storage` | Storage subsystem health
+|===
+
+== Backup & Restore
+
+=== Backup Strategy
+
+FormDB's append-only journal enables:
+
+* **Point-in-time recovery**: Restore to any journal sequence
+* **Incremental backups**: Only new journal entries
+* **Continuous archival**: Stream to object storage
+
+=== Backup Commands (Planned)
+
+[source,bash]
+----
+# Full backup
+formdb backup --full /path/to/backup
+
+# Incremental backup
+formdb backup --since 1000 /path/to/backup
+
+# Restore to point in time
+formdb restore --to-sequence 5000 /path/to/backup
+----
+
+== Disaster Recovery
+
+_Disaster recovery procedures coming soon._
+
+== See Also
+
+* link:DEPLOYMENT.adoc[Deployment Guide]
+* link:../SECURITY.md[Security Policy]

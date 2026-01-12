@@ -1,0 +1,75 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+= FormDB Versioning & Stability Policy
+:toc:
+:icons: font
+
+[.lead]
+API stability guarantees and versioning conventions for FormDB.
+
+[NOTE]
+====
+This document is a work in progress. FormDB is currently in **pre-1.0 development**.
+====
+
+== Current Status
+
+[cols="1,2"]
+|===
+| Component | Stability
+
+| FQL Core Syntax | Unstable (may change)
+| Block Format | Unstable (may change)
+| Journal Format | Unstable (may change)
+| Zig ABI | Unstable (may change)
+|===
+
+== Version Numbering
+
+FormDB follows https://semver.org/[Semantic Versioning]:
+
+* `MAJOR.MINOR.PATCH` (e.g., `1.2.3`)
+* Pre-1.0: Breaking changes may occur in any release
+* Post-1.0: Breaking changes only in major versions
+
+== Stability Tiers (Post-1.0)
+
+=== Stable
+* FQL query syntax
+* Core data types
+* Provenance model
+
+=== Experimental
+* Dependent types (FQLdt)
+* Self-normalizing features
+* Distributed consensus
+
+=== Internal
+* Block layout details
+* Journal encoding
+* ABI internals
+
+== Breaking Change Policy
+
+.Pre-1.0 (Current)
+* Breaking changes documented in CHANGELOG.md
+* Migration scripts provided when feasible
+* Deprecation warnings where possible
+
+.Post-1.0 (Future)
+* 6-month deprecation period
+* Migration tooling required
+* LTS releases for enterprise users
+
+== Supported Versions
+
+|===
+| Version | Status | Support Until
+
+| 0.x.x | Development | N/A
+| 1.0.0 | Planned | TBD
+|===
+
+== See Also
+
+* link:CHANGELOG.md[Changelog]
+* link:ROADMAP.adoc[Roadmap]

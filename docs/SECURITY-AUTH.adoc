@@ -1,0 +1,100 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+= FormDB Security & Authentication Guide
+:toc:
+:icons: font
+
+[.lead]
+Security architecture, authentication models, and hardening guidelines for FormDB.
+
+[NOTE]
+====
+**Status: Work in Progress**
+
+This document outlines the planned security architecture. Implementation is ongoing.
+====
+
+== Security Model
+
+=== Core Principles
+
+[cols="1,2"]
+|===
+| Principle | Description
+
+| Auditability First
+| Every operation is journaled with provenance
+
+| Constraint Enforcement
+| All constraints enforced at bridge layer
+
+| No Silent Failures
+| Rejections always include explanations
+
+| Reversibility
+| Operations can be undone (or explicitly marked irreversible)
+|===
+
+== Authentication
+
+=== Planned Authentication Methods
+
+* [ ] **API Keys** - Simple token-based auth
+* [ ] **JWT** - Stateless tokens with claims
+* [ ] **OIDC/OAuth2** - Enterprise SSO integration
+* [ ] **mTLS** - Mutual TLS for service-to-service
+* [ ] **FIDO2/WebAuthn** - Passwordless authentication (future)
+
+=== Multi-Tenant Model
+
+_Documentation coming soon._
+
+FormDB supports multi-tenancy with:
+
+* Database-level isolation
+* Collection-level permissions
+* Row-level security (planned)
+
+== Authorization
+
+=== Role-Based Access Control (RBAC)
+
+_Coming soon_
+
+=== Attribute-Based Access Control (ABAC)
+
+_Coming soon_
+
+== Security Hardening
+
+=== Network Security
+
+* TLS 1.3 required for all connections
+* mTLS recommended for production
+* Network segmentation guidelines (coming)
+
+=== Data Security
+
+* Encryption at rest (planned)
+* Field-level encryption (planned)
+* Key management integration (planned)
+
+=== Threat Model
+
+_Formal threat model documentation coming soon._
+
+== Compliance
+
+=== Supported Compliance Frameworks
+
+* [ ] SOC 2 Type II (planned)
+* [ ] GDPR (provenance tracking supports right to erasure)
+* [ ] HIPAA (planned)
+
+== Security Reporting
+
+See link:../SECURITY.md[SECURITY.md] for vulnerability reporting procedures.
+
+== See Also
+
+* link:../SECURITY.md[Security Policy]
+* link:OBSERVABILITY.adoc[Observability Guide]

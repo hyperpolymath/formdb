@@ -187,13 +187,36 @@ See link:formdb.scm[formdb.scm] for structured open questions with acceptance cr
 
 == Documentation
 
-* link:ARCHITECTURE.adoc[ARCHITECTURE.adoc] - Technical architecture deep-dive
-* link:ROADMAP.adoc[ROADMAP.adoc] - Development roadmap
-* link:PHILOSOPHY.adoc[PHILOSOPHY.adoc] - Design philosophy and principles
+=== Getting Started
+* link:QUICKSTART.adoc[Quickstart Guide] - Get running in 5 minutes
+* link:VERSIONING.adoc[Versioning & Stability] - API stability guarantees
+* link:CHANGELOG.md[Changelog] - Release history
+
+=== Architecture & Design
+* link:ARCHITECTURE.adoc[Architecture] - Technical architecture deep-dive
+* link:ROADMAP.adoc[Roadmap] - Development roadmap
+* link:PHILOSOPHY.adoc[Philosophy] - Design philosophy and principles
 * link:formdb.scm[formdb.scm] - Machine-readable specification
-* link:spec/self-normalizing.adoc[Self-Normalizing Database] - Automatic FD discovery, type-encoded normal forms, proof-carrying schema evolution
+
+=== Specifications
+* link:spec/fql.adoc[FQL Specification] - Query language reference
+* link:spec/fql-dependent-types.md[FQL Dependent Types] - Compile-time verified queries
+* link:spec/self-normalizing.adoc[Self-Normalizing Database] - Automatic FD discovery, proof-carrying schema evolution
+* link:spec/blocks.adoc[Block Format] - Storage layer specification
+* link:spec/journal.adoc[Journal Format] - Audit log specification
+
+=== Operations
+* link:docs/DEPLOYMENT.adoc[Deployment Guide] - Run FormDB in production
+* link:docs/OBSERVABILITY.adoc[Observability] - Monitoring, logging, tracing
+* link:docs/SECURITY-AUTH.adoc[Security & Auth] - Authentication and hardening
+
+=== Integration
+* link:docs/API-REFERENCE.adoc[API Reference] - Programmatic interfaces
+* link:docs/MIGRATION-FROM-RDBMS.adoc[Migration from RDBMS] - Moving from PostgreSQL/MySQL
+* link:docs/INTEGRATION-PATTERNS.adoc[Integration Patterns] - Queues, search, analytics
+
+=== Domain-Specific
 * link:docs/WP05_interactive_documentary.md[WP05] - FormDB for Interactive Documentary/Journalism
-* link:spec/fql-dependent-types.md[FQL Dependent Types] - Compile-time verified query language (see also https://github.com/hyperpolymath/fqldt[fqldt repo])
 
 == Related Projects
 

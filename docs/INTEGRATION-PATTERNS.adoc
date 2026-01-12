@@ -1,0 +1,150 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+= FormDB Integration Patterns
+:toc:
+:icons: font
+
+[.lead]
+Patterns for integrating FormDB with external systems.
+
+[NOTE]
+====
+**Status: Work in Progress**
+
+Integration adapters are planned for post-PoC phases.
+====
+
+== Overview
+
+FormDB can integrate with various external systems while maintaining its audit-first guarantees.
+
+== Message Queues
+
+=== Kafka
+
+_Coming soon._
+
+[source,text]
+----
+┌─────────────┐     ┌─────────────┐     ┌─────────────┐
+│  Producers  │────▶│   Kafka     │────▶│   FormDB   │
+└─────────────┘     └─────────────┘     └─────────────┘
+                                              │
+                                              ▼
+                                        [Journal with
+                                         Kafka offsets
+                                         in provenance]
+----
+
+=== RabbitMQ
+
+_Coming soon._
+
+=== NATS
+
+_Coming soon._
+
+== Search Engines
+
+=== Elasticsearch / OpenSearch
+
+_Coming soon._
+
+Pattern: Journal → Change Data Capture → Search Index
+
+=== Meilisearch
+
+_Coming soon._
+
+== Analytics & BI
+
+=== Exporting to Data Warehouses
+
+_Coming soon._
+
+Pattern: Journal replay → Parquet → Data Warehouse
+
+=== Apache Arrow / DuckDB
+
+_Coming soon._
+
+== Graph Databases
+
+=== Neo4j
+
+_Coming soon._
+
+FormDB's edge collections can be synchronized to Neo4j for graph analytics.
+
+=== RDF / SPARQL
+
+_Coming soon._
+
+Planned: RDF mapping for FormDB documents and edges.
+
+== Event Sourcing
+
+FormDB's journal-first design is naturally compatible with event sourcing:
+
+[source,text]
+----
+FormDB Journal Entry = Event
+───────────────────────────
+{
+  "sequence": 1001,
+  "op_type": "DOC_INSERT",
+  "collection": "evidence",
+  "data": {...},
+  "provenance": {
+    "actor": "alice",
+    "rationale": "Primary source"
+  }
+}
+----
+
+== Change Data Capture (CDC)
+
+=== Pattern
+
+[source,text]
+----
+FormDB Journal ──▶ CDC Connector ──▶ External System
+       │
+       └── Sequence numbers for exactly-once delivery
+----
+
+=== Planned Connectors
+
+* [ ] Debezium-compatible CDC
+* [ ] Kafka Connect source
+* [ ] Custom webhook publisher
+
+== API Gateway Integration
+
+=== GraphQL
+
+_Coming soon._
+
+=== REST API
+
+See link:API-REFERENCE.adoc[API Reference].
+
+== AI/ML Pipelines
+
+=== Vector Embeddings
+
+_Coming soon._
+
+Pattern: Documents → Embedding model → Vector DB → Semantic search
+
+=== LLM Integration
+
+FormDB's provenance tracking is designed for AI agent ecosystems:
+
+* Track which AI generated content
+* Audit AI decision rationales
+* Maintain human-in-the-loop oversight
+
+== See Also
+
+* link:API-REFERENCE.adoc[API Reference]
+* link:../ARCHITECTURE.adoc[Architecture Guide]

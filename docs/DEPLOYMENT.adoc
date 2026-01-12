@@ -1,0 +1,91 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+= FormDB Deployment Guide
+:toc:
+:icons: font
+
+[.lead]
+How to deploy FormDB in development and production environments.
+
+[NOTE]
+====
+**Status: Work in Progress**
+
+FormDB is currently in specification/PoC phase. This guide will be expanded as implementation progresses.
+====
+
+== Development Setup
+
+=== Prerequisites
+
+* Gforth 0.7.3+
+* Factor 0.99+
+* Zig 0.11+
+* Elixir 1.15+ (optional, for control plane)
+
+=== Quick Start
+
+[source,bash]
+----
+git clone https://github.com/hyperpolymath/formdb.git
+cd formdb
+just dev
+----
+
+== Production Deployment
+
+_Coming soon_
+
+=== Recommended Architecture
+
+[source,text]
+----
+┌─────────────────────────────────────────┐
+│  Load Balancer                          │
+├─────────────────────────────────────────┤
+│  Form.ControlPlane (Elixir/OTP)         │
+│  ├── Session management                 │
+│  └── Cluster coordination               │
+├─────────────────────────────────────────┤
+│  FormDB Core (Forth + Factor + Zig)     │
+├─────────────────────────────────────────┤
+│  Storage (Local SSD or Network Block)   │
+└─────────────────────────────────────────┘
+----
+
+=== Configuration
+
+_Configuration options will be documented here._
+
+=== Resource Requirements
+
+|===
+| Component | Minimum | Recommended
+
+| CPU | 2 cores | 4+ cores
+| RAM | 4 GB | 16+ GB
+| Storage | SSD required | NVMe recommended
+|===
+
+== Docker
+
+_Docker images coming soon._
+
+== Kubernetes
+
+_Helm charts coming soon._
+
+== Cloud Providers
+
+=== AWS
+_Coming soon_
+
+=== GCP
+_Coming soon_
+
+=== Azure
+_Coming soon_
+
+== See Also
+
+* link:OBSERVABILITY.adoc[Observability Guide]
+* link:../SECURITY.md[Security Policy]

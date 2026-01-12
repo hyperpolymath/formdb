@@ -1,0 +1,145 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+= FormDB API Reference
+:toc:
+:icons: font
+
+[.lead]
+Complete API reference for FormDB's programmatic interfaces.
+
+[NOTE]
+====
+**Status: Work in Progress**
+
+FormDB is in specification phase. This API reference will be expanded as implementation progresses.
+====
+
+== API Overview
+
+FormDB exposes multiple interface layers:
+
+[cols="1,2,1"]
+|===
+| Layer | Description | Status
+
+| FQL (Query Language)
+| High-level query interface
+| Specified
+
+| Zig ABI (Form.Bridge)
+| FFI for language bindings
+| Specified
+
+| HTTP/REST
+| Network API
+| Planned
+
+| gRPC
+| High-performance RPC
+| Planned
+|===
+
+== FQL API
+
+See link:../spec/fql.adoc[FQL Specification] for the complete query language reference.
+
+=== Quick Reference
+
+[source,fql]
+----
+-- Collections
+CREATE COLLECTION name (fields);
+DROP COLLECTION name;
+
+-- Documents
+INSERT INTO collection {document} WITH PROVENANCE {provenance};
+SELECT fields FROM collection WHERE condition;
+UPDATE collection SET field = value WHERE condition;
+DELETE FROM collection WHERE condition;
+
+-- Introspection
+INTROSPECT SCHEMA [collection];
+INTROSPECT CONSTRAINTS [collection];
+INTROSPECT JOURNAL [SINCE sequence];
+EXPLAIN statement;
+----
+
+== Zig ABI (Form.Bridge)
+
+=== Function Signatures
+
+[source,zig]
+----
+// Database lifecycle
+pub extern fn fdb_open(path: [*:0]const u8, path_len: usize) callconv(.C) FdbStatus;
+pub extern fn fdb_close(db: *FdbDb) callconv(.C) FdbStatus;
+
+// Transactions
+pub extern fn fdb_begin_txn(db: *FdbDb) callconv(.C) FdbTxnResult;
+pub extern fn fdb_commit_txn(txn: *FdbTxn) callconv(.C) FdbStatus;
+pub extern fn fdb_rollback_txn(txn: *FdbTxn) callconv(.C) FdbStatus;
+
+// Operations
+pub extern fn fdb_insert(db: *FdbDb, collection: [*:0]const u8, doc: [*]const u8, len: usize) callconv(.C) FdbStatus;
+pub extern fn fdb_query(db: *FdbDb, fql: [*:0]const u8, fql_len: usize) callconv(.C) FdbQueryResult;
+----
+
+=== Status Codes
+
+[cols="1,1,2"]
+|===
+| Code | Name | Description
+
+| 0 | FDB_OK | Success
+| 1001 | FDB_ERR_NOT_FOUND | Document/collection not found
+| 1002 | FDB_ERR_CONSTRAINT | Constraint violation
+| 1003 | FDB_ERR_PARSE | FQL parse error
+| 2001 | FDB_ERR_INTERNAL | Internal error
+|===
+
+== HTTP API (Planned)
+
+=== Endpoints
+
+[cols="1,2,2"]
+|===
+| Method | Endpoint | Description
+
+| POST | /v1/query | Execute FQL query
+| GET | /v1/collections | List collections
+| GET | /v1/collections/{name} | Get collection schema
+| GET | /v1/journal | Read journal entries
+| GET | /v1/health | Health check
+|===
+
+=== Request/Response Format
+
+_Coming soon._
+
+== Rate Limiting
+
+_Rate limiting configuration coming soon._
+
+== Pagination
+
+_Pagination patterns coming soon._
+
+== Error Responses
+
+All errors follow this structure:
+
+[source,json]
+----
+{
+  "status": "error",
+  "code": 1001,
+  "message": "Human-readable message",
+  "details": { ... },
+  "rationale": "Explanation of why this failed",
+  "suggestions": ["Fix option 1", "Fix option 2"]
+}
+----
+
+== See Also
+
+* link:../spec/fql.adoc[FQL Specification]
+* link:../ARCHITECTURE.adoc[Architecture Guide]

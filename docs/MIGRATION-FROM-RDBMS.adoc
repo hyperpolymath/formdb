@@ -1,0 +1,138 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+= Migrating to FormDB from RDBMS
+:toc:
+:icons: font
+
+[.lead]
+Guide for migrating from traditional relational databases to FormDB.
+
+[NOTE]
+====
+**Status: Work in Progress**
+
+Migration tooling is planned for post-PoC phases. This document outlines the conceptual migration path.
+====
+
+== Overview
+
+FormDB is not a drop-in replacement for PostgreSQL, MySQL, or other RDBMS. It's designed for different use cases:
+
+[cols="1,1,1"]
+|===
+| Feature | Traditional RDBMS | FormDB
+
+| Primary goal
+| Performance, ACID
+| Auditability, provenance
+
+| Query language
+| SQL
+| FQL (narrative-first)
+
+| History
+| Optional (triggers/audit tables)
+| Built-in (journal-first)
+
+| Reversibility
+| Manual (backups)
+| Native (every op has inverse)
+|===
+
+== When to Migrate
+
+FormDB is ideal for:
+
+* Investigative journalism databases
+* Compliance/governance systems
+* Agentic AI ecosystems
+* Long-term archives requiring audit trails
+
+FormDB is NOT ideal for:
+
+* High-throughput OLTP
+* Analytics/OLAP workloads
+* Drop-in Postgres replacement
+
+== Migration Steps
+
+=== 1. Schema Mapping
+
+[cols="1,1"]
+|===
+| SQL | FQL
+
+| `CREATE TABLE` | `CREATE COLLECTION`
+| `VARCHAR(n)` | `STRING`
+| `INTEGER` | `INTEGER`
+| `DECIMAL(p,s)` | `FLOAT`
+| `BOOLEAN` | `BOOLEAN`
+| `TIMESTAMP` | `TIMESTAMP`
+| `JSONB` | `JSON`
+|===
+
+.SQL Example
+[source,sql]
+----
+CREATE TABLE evidence (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  source VARCHAR(100),
+  score INTEGER CHECK (score BETWEEN 0 AND 100)
+);
+----
+
+.FQL Equivalent
+[source,fql]
+----
+CREATE COLLECTION evidence (
+  title STRING NOT NULL,
+  source STRING,
+  score PROMPT_SCORE  -- Built-in 0-100 type
+);
+----
+
+=== 2. Data Export
+
+_Export tooling coming soon._
+
+[source,bash]
+----
+# Planned: Export from Postgres
+pg_dump --format=csv mydb > export.csv
+
+# Planned: Import to FormDB
+formdb import --from-csv export.csv --collection evidence
+----
+
+=== 3. Query Translation
+
+[cols="1,1"]
+|===
+| SQL | FQL
+
+| `SELECT * FROM t` | `SELECT * FROM t`
+| `SELECT * FROM t WHERE x = 1` | `SELECT * FROM t WHERE x = 1`
+| `INSERT INTO t (a) VALUES (1)` | `INSERT INTO t {"a": 1} WITH PROVENANCE {...}`
+| `JOIN` | `TRAVERSE` (for edges)
+|===
+
+=== 4. Provenance Addition
+
+FormDB requires provenance for all mutations. Plan how to capture:
+
+* **Actor**: Who performed the action
+* **Rationale**: Why the action was taken
+* **Timestamp**: When (automatic)
+
+== Migration Tooling (Planned)
+
+* [ ] `formdb-migrate` CLI tool
+* [ ] PostgreSQL adapter
+* [ ] MySQL adapter
+* [ ] SQLite adapter
+* [ ] CSV/JSON import
+
+== See Also
+
+* link:../spec/fql.adoc[FQL Specification]
+* link:../QUICKSTART.adoc[Quickstart Guide]

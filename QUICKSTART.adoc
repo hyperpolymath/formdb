@@ -1,0 +1,266 @@
+// SPDX-License-Identifier: AGPL-3.0-or-later
+= FormDB Quickstart
+:toc: macro
+:toc-title: Contents
+:toclevels: 2
+:icons: font
+:source-highlighter: rouge
+
+[.lead]
+Get FormDB running in 5 minutes.
+
+toc::[]
+
+== Prerequisites
+
+* https://github.com/cisco/gforth[Gforth] 0.7.3+ (for Form.Blocks and Form.Model)
+* https://factorcode.org/[Factor] 0.99+ (for Form.Runtime / FQL)
+* https://ziglang.org/[Zig] 0.11+ (for Form.Bridge)
+* https://just.systems/[just] (build tool)
+
+.Quick install on Fedora/RHEL
+[source,bash]
+----
+sudo dnf install gforth
+# Factor and Zig: download from official sites
+----
+
+.Quick install on macOS
+[source,bash]
+----
+brew install gforth zig just
+# Factor: download from factorcode.org
+----
+
+== Clone and Build
+
+[source,bash]
+----
+git clone https://github.com/hyperpolymath/formdb.git
+cd formdb
+just build
+----
+
+== Hello World: Create Your First Database
+
+=== Step 1: Initialize a Database
+
+[source,bash]
+----
+# Create a new FormDB instance
+just init mydb
+----
+
+This creates:
+[source,text]
+----
+mydb/
+├── blocks/      # Block storage
+├── journal/     # Append-only journal
+└── meta.scm     # Database metadata
+----
+
+=== Step 2: Create a Collection
+
+Using FQL (FormDB Query Language):
+
+[source,fql]
+----
+-- Create a collection for evidence tracking
+CREATE COLLECTION evidence (
+  title STRING NOT NULL,
+  source STRING,
+  prompt_score PROMPT_SCORE,
+  url STRING
+) WITH SCHEMA {
+  "description": "Evidence for investigative journalism",
+  "constraints": {
+    "title_required": {"type": "not_null", "field": "title"}
+  }
+};
+----
+
+Run it:
+[source,bash]
+----
+just fql mydb 'CREATE COLLECTION evidence (title STRING NOT NULL, source STRING, prompt_score PROMPT_SCORE);'
+----
+
+=== Step 3: Insert Data with Provenance
+
+[source,fql]
+----
+INSERT INTO evidence {
+  "title": "UK CPI Inflation Data July 2022",
+  "source": "ONS",
+  "prompt_score": 95,
+  "url": "https://www.ons.gov.uk/cpi"
+}
+WITH PROVENANCE {
+  "actor": "alice",
+  "rationale": "Official government statistics - primary source"
+};
+----
+
+Run it:
+[source,bash]
+----
+just fql mydb 'INSERT INTO evidence {"title": "UK CPI Inflation Data", "source": "ONS", "prompt_score": 95} WITH PROVENANCE {"actor": "alice", "rationale": "Primary source"};'
+----
+
+=== Step 4: Query Your Data
+
+[source,fql]
+----
+-- Simple query
+SELECT * FROM evidence WHERE prompt_score >= 80;
+
+-- Query with provenance (see who added what)
+SELECT * FROM evidence WITH PROVENANCE;
+
+-- Explain the query plan
+EXPLAIN SELECT * FROM evidence WHERE source = "ONS";
+----
+
+Run it:
+[source,bash]
+----
+just fql mydb 'SELECT * FROM evidence WITH PROVENANCE;'
+----
+
+=== Step 5: Inspect the Journal
+
+Every operation is journaled for auditability:
+
+[source,fql]
+----
+INTROSPECT JOURNAL SINCE 0;
+----
+
+Output shows complete history:
+[source,json]
+----
+{
+  "entries": [
+    {
+      "sequence": 1,
+      "op_type": "COLLECTION_CREATE",
+      "collection": "evidence",
+      "timestamp": "2026-01-12T10:00:00Z"
+    },
+    {
+      "sequence": 2,
+      "op_type": "DOC_INSERT",
+      "collection": "evidence",
+      "actor": "alice",
+      "rationale": "Primary source"
+    }
+  ]
+}
+----
+
+== Core Concepts
+
+=== Provenance Tracking
+
+Every mutation in FormDB requires provenance:
+
+[source,fql]
+----
+INSERT INTO claims (text, confidence)
+VALUES ('Inflation exceeded 10%', 0.95)
+WITH PROVENANCE {
+  "actor": "journalist_bob",
+  "rationale": "Cross-referenced ONS data with Bank of England reports"
+};
+----
+
+=== Reversibility
+
+Every operation has an inverse. You can undo any change:
+
+[source,fql]
+----
+-- View what would be undone
+EXPLAIN REVERSE LAST;
+
+-- Actually reverse the last operation
+REVERSE LAST WITH PROVENANCE {
+  "actor": "editor_carol",
+  "rationale": "Correction: source was misattributed"
+};
+----
+
+=== Constraint Explanations
+
+When constraints fail, FormDB tells you why:
+
+[source,fql]
+----
+INSERT INTO evidence (source) VALUES ('Anonymous');
+-- No title provided!
+----
+
+Error response:
+[source,json]
+----
+{
+  "status": "error",
+  "code": 1003,
+  "message": "Constraint violation: title_required",
+  "details": {
+    "field": "title",
+    "constraint": "not_null",
+    "explanation": "The 'title' field is required for all evidence records"
+  },
+  "suggestions": [
+    "Provide a title value",
+    "If title is unknown, use '[Untitled]' with rationale"
+  ]
+}
+----
+
+== Next Steps
+
+* link:spec/fql.adoc[FQL Language Reference] - Full query language documentation
+* link:ARCHITECTURE.adoc[Architecture Guide] - Understand the layers
+* link:docs/DEPLOYMENT.adoc[Deployment Guide] - Run FormDB in production
+* link:spec/fql-dependent-types.md[FQLdt Specification] - Compile-time verified queries
+
+== Troubleshooting
+
+=== "Command not found: gforth"
+
+Install Gforth:
+[source,bash]
+----
+# Fedora/RHEL
+sudo dnf install gforth
+
+# Ubuntu/Debian
+sudo apt install gforth
+
+# macOS
+brew install gforth
+----
+
+=== "Permission denied" on journal
+
+FormDB requires write access to the database directory:
+[source,bash]
+----
+chmod -R u+w mydb/
+----
+
+=== "Constraint violation" on valid data
+
+Check the schema definition:
+[source,fql]
+----
+INTROSPECT SCHEMA evidence;
+----
+
+== Getting Help
+
+* https://github.com/hyperpolymath/formdb/issues[GitHub Issues] - Report bugs
+* link:CONTRIBUTING.adoc[Contributing Guide] - Join development
