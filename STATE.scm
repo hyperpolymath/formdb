@@ -3,7 +3,7 @@
 
 (state
   (metadata
-    (version "1.1.0")
+    (version "1.2.0")
     (schema-version "1.0")
     (created "2026-01-03")
     (updated "2026-01-12")
@@ -64,7 +64,11 @@
       "Cluster coordination (distributed/src/FormDB_Distributed_Cluster.res)"
       "Raft consensus (distributed/src/FormDB_Distributed_Consensus.res)"
       "Data sharding (distributed/src/FormDB_Distributed_Sharding.res)"
-      "Data replication (distributed/src/FormDB_Distributed_Replication.res)"))
+      "Data replication (distributed/src/FormDB_Distributed_Replication.res)"
+      "Aggregations (analytics/src/FormDB_Analytics_Aggregations.res)"
+      "Time series (analytics/src/FormDB_Analytics_TimeSeries.res)"
+      "Window functions (analytics/src/FormDB_Analytics_Window.res)"
+      "Export formats (analytics/src/FormDB_Analytics_Export.res)"))
 
   (route-to-mvp
     (milestone (id "M1") (name "Specification Complete")
@@ -157,7 +161,15 @@
         (item "Raft consensus" (status "complete"))
         (item "Data sharding" (status "complete"))
         (item "Data replication" (status "complete"))
-        (item "Distributed documentation" (status "complete")))))
+        (item "Distributed documentation" (status "complete"))))
+    (milestone (id "M18") (name "Advanced Analytics")
+      (status "complete")
+      (items
+        (item "Aggregation functions" (status "complete"))
+        (item "Time series analysis" (status "complete"))
+        (item "Window functions" (status "complete"))
+        (item "Visualization exports" (status "complete"))
+        (item "Analytics documentation" (status "complete")))))
 
   (blockers-and-issues
     (critical)
@@ -308,4 +320,14 @@
         "Built data replication with consistency levels"
         "Comprehensive distributed documentation"
         "Milestone M17 (Distributed Mode) complete"
-        "v1.1.0 Release"))))
+        "v1.1.0 Release"))
+    (snapshot (date "2026-01-12") (session "advanced-analytics")
+      (accomplishments
+        "Created analytics/ directory structure"
+        "Built aggregation functions (count, sum, avg, min, max, median, stddev, percentile)"
+        "Built time series analysis with trend detection"
+        "Built SQL-style window functions"
+        "Built visualization exports (CSV, JSON, Chart.js, D3, Vega-Lite)"
+        "Comprehensive analytics documentation"
+        "Milestone M18 (Advanced Analytics) complete"
+        "v1.2.0 Release"))))

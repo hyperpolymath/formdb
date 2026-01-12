@@ -9,6 +9,55 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [1.2.0] - 2026-01-12
+
+Advanced Analytics milestone: **M18 Complete**
+
+This release adds comprehensive analytics capabilities to FormDB.
+
+### Added
+
+#### Aggregations (`analytics/src/FormDB_Analytics_Aggregations.res`)
+- Statistical aggregations: Count, Sum, Avg, Min, Max
+- Advanced: Median, Stddev, Variance, Percentile
+- CountDistinct for unique value counting
+- Group by with multiple aggregations
+- Numeric value extraction from JSON
+
+#### Time Series (`analytics/src/FormDB_Analytics_TimeSeries.res`)
+- Time bucketing (Second to Year granularity)
+- Trend analysis with linear regression
+- Moving average calculation
+- Anomaly detection using standard deviation
+- R-squared and slope metrics
+
+#### Window Functions (`analytics/src/FormDB_Analytics_Window.res`)
+- Ranking: RowNumber, Rank, DenseRank, PercentRank, Ntile
+- Navigation: Lag, Lead, FirstValue, LastValue, NthValue
+- Running calculations: CumulativeSum, RunningAvg
+- Partition by and order by support
+- Configurable frame boundaries
+
+#### Visualization Export (`analytics/src/FormDB_Analytics_Export.res`)
+- CSV export with configurable options
+- JSON export for APIs
+- Chart.js configuration export
+- Vega-Lite specification export
+- D3-compatible data format
+- Table data format (columns + rows)
+
+#### Documentation
+- `analytics/README.md` - Comprehensive analytics documentation
+- Use case examples (sales, financial, user analytics)
+- Function reference for all modules
+
+### Changed
+
+- STATE.scm updated to M18 100% completion
+- Added analytics module to working-features
+
+---
+
 ## [1.1.0] - 2026-01-12
 
 Distributed Mode milestone: **M17 Complete**
@@ -810,6 +859,7 @@ Initial release: **Repository Initialization**
 
 | Version | Date | Milestone | Key Features |
 |---------|------|-----------|--------------|
+| 1.2.0 | 2026-01-12 | M18 Complete | Aggregations, time series, window functions, exports |
 | 1.1.0 | 2026-01-12 | M17 Complete | Cluster, consensus, sharding, replication |
 | 1.0.0 | 2026-01-12 | **Production** | First stable release, all M1-M16 complete |
 | 0.0.10 | 2026-01-12 | M16 Complete | Config validation, health checks, graceful shutdown, readiness |
@@ -841,7 +891,8 @@ FormDB is in pre-1.0 development. APIs, formats, and interfaces may change witho
 
 ## Links
 
-[Unreleased]: https://github.com/hyperpolymath/formdb/compare/v1.1.0...HEAD
+[Unreleased]: https://github.com/hyperpolymath/formdb/compare/v1.2.0...HEAD
+[1.2.0]: https://github.com/hyperpolymath/formdb/compare/v1.1.0...v1.2.0
 [1.1.0]: https://github.com/hyperpolymath/formdb/compare/v1.0.0...v1.1.0
 [1.0.0]: https://github.com/hyperpolymath/formdb/compare/v0.0.10...v1.0.0
 [0.0.10]: https://github.com/hyperpolymath/formdb/compare/v0.0.9...v0.0.10
