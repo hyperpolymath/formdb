@@ -9,6 +9,51 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.0.8] - 2026-01-12
+
+Testing & Verification milestone: **M14 Complete**
+
+This release completes Milestone M14, delivering a comprehensive testing framework.
+
+### Added
+
+#### Property-Based Tests (`tests/property/`)
+- Random FDQL statement generators
+- Structural property verification
+- Configurable iterations and seed
+- Property test runner with result tracking
+
+#### Fuzz Testing (`tests/fuzz/`)
+- Multiple mutation strategies (BitFlip, ByteFlip, Dictionary, etc.)
+- Corpus-based fuzzing with seed inputs
+- Crash and interesting input detection
+- FDQL parser fuzz targets
+
+#### Integration Tests (`tests/integration/`)
+- Strapi plugin tests (9 test cases)
+- Directus extension tests (7 test cases)
+- Ghost webhook tests (8 test cases)
+- Payload adapter tests (9 test cases)
+- Mock HTTP client for isolated testing
+
+#### E2E Tests (`tests/e2e/`)
+- API suite (health, CRUD, queries, introspection)
+- Sync suite (create, update, delete, provenance, bidirectional)
+- HTTP client utilities for Deno
+
+#### Test Documentation
+- `tests/README.md` - Comprehensive test suite documentation
+- Quick start guide for all test categories
+- CI integration examples
+- Configuration reference
+
+### Changed
+
+- STATE.scm updated to M14 100% completion
+- Added test components to working-features
+
+---
+
 ## [0.0.7] - 2026-01-12
 
 CMS Integrations milestone: **M13 Complete**
@@ -511,6 +556,7 @@ Initial release: **Repository Initialization**
 
 | Version | Date | Milestone | Key Features |
 |---------|------|-----------|--------------|
+| 0.0.8 | 2026-01-12 | M14 Complete | Property tests, fuzz testing, integration tests, E2E tests |
 | 0.0.7 | 2026-01-12 | M13 Complete | Strapi, Directus, Ghost, Payload CMS integrations |
 | 0.0.6 | 2026-01-12 | M12 Complete | ReScript client, PHP client, SDK generator |
 | 0.0.5 | 2026-01-12 | M11 Complete | Multi-protocol API server, WebSocket subscriptions |
@@ -537,7 +583,8 @@ FormDB is in pre-1.0 development. APIs, formats, and interfaces may change witho
 
 ## Links
 
-[Unreleased]: https://github.com/hyperpolymath/formdb/compare/v0.0.7...HEAD
+[Unreleased]: https://github.com/hyperpolymath/formdb/compare/v0.0.8...HEAD
+[0.0.8]: https://github.com/hyperpolymath/formdb/compare/v0.0.7...v0.0.8
 [0.0.7]: https://github.com/hyperpolymath/formdb/compare/v0.0.6...v0.0.7
 [0.0.6]: https://github.com/hyperpolymath/formdb/compare/v0.0.5...v0.0.6
 [0.0.5]: https://github.com/hyperpolymath/formdb/compare/v0.0.4...v0.0.5

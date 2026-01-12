@@ -3,7 +3,7 @@
 
 (state
   (metadata
-    (version "0.0.7")
+    (version "0.0.8")
     (schema-version "1.0")
     (created "2026-01-03")
     (updated "2026-01-12")
@@ -48,7 +48,11 @@
       "Strapi plugin (integrations/strapi/)"
       "Directus hook extension (integrations/directus/)"
       "Ghost webhook server (integrations/ghost/)"
-      "Payload CMS adapter (integrations/payload/)"))
+      "Payload CMS adapter (integrations/payload/)"
+      "Property-based test suite (tests/property/)"
+      "Fuzz testing framework (tests/fuzz/)"
+      "CMS integration tests (tests/integration/)"
+      "E2E test suite (tests/e2e/)"))
 
   (route-to-mvp
     (milestone (id "M1") (name "Specification Complete")
@@ -109,7 +113,15 @@
         (item "Directus hook extension" (status "complete"))
         (item "Ghost webhook server" (status "complete"))
         (item "Payload CMS adapter" (status "complete"))
-        (item "Integration documentation" (status "complete")))))
+        (item "Integration documentation" (status "complete"))))
+    (milestone (id "M14") (name "Testing & Verification")
+      (status "complete")
+      (items
+        (item "Property-based tests for FDQL" (status "complete"))
+        (item "Fuzz testing for parser" (status "complete"))
+        (item "CMS integration tests" (status "complete"))
+        (item "E2E test suite" (status "complete"))
+        (item "Test documentation" (status "complete")))))
 
   (blockers-and-issues
     (critical)
@@ -119,16 +131,16 @@
 
   (critical-next-actions
     (immediate
-      "Build integration test suite for CMS plugins"
-      "Add E2E tests for sync scenarios")
+      "Review test coverage reports"
+      "Set up CI for automated testing")
     (this-week
-      "M14: Testing & Verification framework"
-      "Property-based tests for FDQL"
-      "Fuzz testing for parser")
+      "M15: Performance Optimization"
+      "Query plan caching"
+      "Connection pooling")
     (this-month
-      "Complete M14 (Testing & Verification)"
-      "Prepare for v0.0.8 release"
-      "Begin M15 planning"))
+      "Complete M15 (Performance)"
+      "Prepare for v0.0.9 release"
+      "Begin 1.0.0 stabilization"))
 
   (unified-roadmap
     (reference "UNIFIED-ROADMAP.scm")
@@ -210,4 +222,13 @@
         "All integrations support bidirectional, cms-to-formdb, formdb-to-cms sync modes"
         "All integrations include provenance metadata for audit trails"
         "Comprehensive integration documentation"
-        "Milestone M13 (CMS Integrations) complete"))))
+        "Milestone M13 (CMS Integrations) complete"))
+    (snapshot (date "2026-01-12") (session "testing-verification")
+      (accomplishments
+        "Created tests/ directory structure"
+        "Built property-based test framework in ReScript"
+        "Built fuzz testing framework with mutation strategies"
+        "Built integration tests for Strapi, Directus, Ghost, Payload"
+        "Built E2E test suite for API and sync scenarios"
+        "Comprehensive test documentation"
+        "Milestone M14 (Testing & Verification) complete"))))

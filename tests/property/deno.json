@@ -1,0 +1,12 @@
+{
+  "name": "@formdb/property-tests",
+  "version": "0.0.8",
+  "tasks": {
+    "build": "npx rescript build",
+    "test": "deno test --allow-read --allow-env src/",
+    "test:watch": "deno test --watch --allow-read --allow-env src/"
+  },
+  "imports": {
+    "@formdb/api": "../../api/src/mod.ts"
+  }
+}
