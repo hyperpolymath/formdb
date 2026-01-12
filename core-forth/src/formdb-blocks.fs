@@ -4,6 +4,9 @@
 \ This is the truth core of FormDB. All data goes through here.
 \ No business logic - just blocks, journals, and integrity.
 
+\ Reset to clean Forth vocabulary to avoid gforth BLOCKS extension conflicts
+only forth definitions
+
 \ ============================================================
 \ Constants
 \ ============================================================
@@ -55,7 +58,7 @@ $08 constant FLAG-DELETED
 \ 60      4     reserved
 
 \ Header field accessors (offset from block start)
-: block-magic      ( addr -- addr' ) ;
+: blk-magic      ( addr -- addr' ) ;
 : block-version    ( addr -- addr' ) 4 + ;
 : block-type       ( addr -- addr' ) 6 + ;
 : block-id         ( addr -- addr' ) 8 + ;
@@ -101,16 +104,18 @@ create crc32c-table 256 cells allot
   loop ;
 
 \ Calculate CRC32C of memory region
+\ Use a variable to hold the address since DO/LOOP uses return stack
+variable crc-addr
 : crc32c ( addr len -- crc )
-  $FFFFFFFF -rot  \ initial CRC
-  0 do
-    over i + c@
-    over $FF and xor
-    cells crc32c-table + @
-    swap 8 rshift xor
+  swap crc-addr !   \ save addr; stack: len
+  $FFFFFFFF swap    \ stack: crc len
+  0 ?do             \ use ?do to handle len=0; stack: crc
+    crc-addr @ i + c@  \ read byte at addr+i; stack: crc byte
+    over $FF and xor   \ XOR with low byte of crc; stack: crc index
+    cells crc32c-table + @  \ lookup in table; stack: crc table-value
+    swap 8 rshift xor  \ combine: (crc >> 8) XOR table-value; stack: new-crc
   loop
-  nip
-  $FFFFFFFF xor ;
+  $FFFFFFFF xor ;   \ final XOR
 
 \ ============================================================
 \ Block Validation
@@ -118,7 +123,7 @@ create crc32c-table 256 cells allot
 
 \ Check if block has valid magic bytes
 : valid-magic? ( addr -- flag )
-  block-magic @ BLOCK-MAGIC = ;
+  blk-magic l@ BLOCK-MAGIC = ;
 
 \ Check if block type is known
 : valid-type? ( addr -- flag )
@@ -133,13 +138,13 @@ create crc32c-table 256 cells allot
 
 \ Check payload length is within bounds
 : valid-payload-len? ( addr -- flag )
-  block-payload-len @ PAYLOAD-SIZE <= ;
+  block-payload-len l@ PAYLOAD-SIZE <= ;
 
 \ Compute and verify checksum
 : valid-checksum? ( addr -- flag )
-  dup block-payload swap block-payload-len @
+  dup block-payload swap block-payload-len l@
   crc32c
-  swap block-checksum @ = ;
+  swap block-checksum l@ = ;
 
 \ Full block validation
 : validate-block ( addr -- flag )
@@ -161,19 +166,20 @@ variable current-sequence
   1736553600000000 ;  \ 2026-01-11T00:00:00Z as placeholder
 
 \ Initialize a new block header
+\ Note: Use l! for 32-bit fields, w! for 16-bit, ! for 64-bit
 : init-block-header ( type block-id -- )
   clear-block
-  block-buffer block-id !
-  block-buffer block-type w!
-  BLOCK-MAGIC block-buffer block-magic !
-  1 block-buffer block-version w!  \ Version 1
-  now-microseconds block-buffer block-created !
-  now-microseconds block-buffer block-modified !
-  current-sequence @ block-buffer block-sequence !
-  0 block-buffer block-prev !
-  0 block-buffer block-flags !
-  0 block-buffer block-reserved !
-  0 block-buffer block-payload-len ! ;
+  block-buffer block-id !          \ 64-bit
+  block-buffer block-type w!       \ 16-bit
+  BLOCK-MAGIC block-buffer blk-magic l!  \ 32-bit magic
+  1 block-buffer block-version w!  \ 16-bit version
+  now-microseconds block-buffer block-created !   \ 64-bit
+  now-microseconds block-buffer block-modified !  \ 64-bit
+  current-sequence @ block-buffer block-sequence !  \ 64-bit
+  0 block-buffer block-prev !      \ 64-bit
+  0 block-buffer block-flags l!    \ 32-bit
+  0 block-buffer block-reserved l! \ 32-bit
+  0 block-buffer block-payload-len l! ; \ 32-bit
 
 \ Set block payload and compute checksum
 : set-block-payload ( src-addr len -- )
@@ -182,13 +188,13 @@ variable current-sequence
     ." Error: payload too large" cr
     exit
   then
-  dup block-buffer block-payload-len !
+  dup block-buffer block-payload-len l!   \ 32-bit store
   block-buffer block-payload swap move
   \ Compute checksum
   block-buffer block-payload
-  block-buffer block-payload-len @
+  block-buffer block-payload-len l@       \ 32-bit fetch
   crc32c
-  block-buffer block-checksum ! ;
+  block-buffer block-checksum l! ;        \ 32-bit store
 
 \ ============================================================
 \ Block I/O
@@ -286,8 +292,8 @@ create superblock-name 64 allot
 \ Free a block (mark as deleted)
 : free-block ( block-id -- )
   block-buffer read-block if
-    FLAG-DELETED block-buffer block-flags @ or
-    block-buffer block-flags !
+    FLAG-DELETED block-buffer block-flags l@ or
+    block-buffer block-flags l!
     block-buffer write-block drop
     1 superblock-free-blocks +!
   then ;
@@ -324,9 +330,9 @@ create superblock-name 64 allot
   ."  type=" dup block-type w@ .block-type cr
   ."   sequence=" dup block-sequence @ .
   ."  created=" dup block-created @ . cr
-  ."   payload_len=" dup block-payload-len @ .
-  ."  checksum=0x" dup block-checksum @ hex . decimal cr
-  ."   flags=" block-flags @ .block-flags cr ;
+  ."   payload_len=" dup block-payload-len l@ .
+  ."  checksum=0x" dup block-checksum l@ hex . decimal cr
+  ."   flags=" block-flags l@ .block-flags cr ;
 
 \ ============================================================
 \ Initialization

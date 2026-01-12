@@ -4,7 +4,7 @@
 \ Documents, edges, collections, and schemas.
 \ All operations go through the journal.
 
-require journal.fs
+require formdb-journal.fs
 
 \ ============================================================
 \ Collection Management
