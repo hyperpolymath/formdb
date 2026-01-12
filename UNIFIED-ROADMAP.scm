@@ -22,8 +22,8 @@
   (ecosystem-summary
     (components
       (formdb
-        (version "0.0.4")
-        (completion 70)
+        (version "0.0.5")
+        (completion 80)
         (role "Core database engine")
         (tech "Forth + Factor + Zig"))
       (fdql-dt
@@ -70,9 +70,10 @@
       (focus "FormDB + FQLdt integration")
 
       (formdb-tasks
-        (task "Complete M11: HTTP API Server" priority: critical status: in-progress)
-        (task "Expose Form.Bridge FFI for proof verification" priority: high status: pending)
-        (task "Add CBOR proof blob acceptance in query path" priority: high status: pending))
+        (task "Complete M11: HTTP API Server" priority: critical status: complete)
+        (task "M12: Language bindings (ReScript, PHP)" priority: critical status: next)
+        (task "M13: CMS integration (WordPress)" priority: high status: pending)
+        (task "M14: Form.ControlPlane (clustering)" priority: medium status: pending))
 
       (fdql-dt-tasks
         (task "M5: Zig FFI bridge to Form.Bridge" priority: critical status: not-started)

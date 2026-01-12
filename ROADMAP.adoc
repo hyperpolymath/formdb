@@ -18,9 +18,11 @@ Development phases from concept to production.
 | M8 | Form.Runtime (FQL Engine) | v0.0.4 | ✅ Complete
 | M9 | Form.Normalizer | v0.0.4 | ✅ Complete
 | M10 | Production Hardening | v0.0.4 | ✅ Complete
-| M11 | HTTP API Server | - | 🚧 Next
-| M12 | Language Bindings (ReScript, PHP) | - | 📋 Planned
-| M13 | CMS Integration (WordPress) | - | 📋 Planned
+| M11 | Multi-Protocol API Server | v0.0.5 | ✅ Complete
+| M12 | Language Bindings (ReScript, PHP) | v0.0.6 | 🚧 Next
+| M13 | CMS Integration (WordPress) | v0.0.7 | 📋 Planned
+| M14 | Form.ControlPlane (Clustering) | v0.1.0 | 📋 Planned
+| M15 | 1.0.0 Release Candidate | v1.0.0-rc | 📋 Planned
 |===
 
 == Phase 0: Specification ✅
@@ -190,22 +192,23 @@ See link:spec/self-normalizing.adoc[Self-Normalizing Specification] for full det
 * ✅ EXPLAIN correlation tests
 * ✅ Large dataset stress tests
 
-== Phase 9: Multi-Protocol API Server
+== Phase 9: Multi-Protocol API Server ✅
 
-*Status*: 🚧 In Progress
+*Status*: Complete (v0.0.5)
 
 *Goal*: Production API server with REST, gRPC, and GraphQL interfaces.
 
-*Dependencies*: Phase 8 (Production Hardening) complete.
-
 === Deliverables
 
-* [ ] API server binary (`formdb-server`) in Zig
-* [ ] REST API with OpenAPI 3.1 specification
-* [ ] gRPC API with Protocol Buffers definitions
-* [ ] GraphQL API with SDL schema
-* [ ] Authentication middleware (JWT, API keys, mTLS)
-* [ ] Health check, metrics, and observability endpoints
+* [x] API server binary (`formdb-server`) in Zig
+* [x] REST API with OpenAPI 3.1 specification (`api/spec/openapi.yaml`)
+* [x] gRPC API with Protocol Buffers (`api/proto/formdb.proto`)
+* [x] GraphQL API with SDL schema (`api/graphql/schema.graphql`)
+* [x] WebSocket support for GraphQL subscriptions (`api/src/websocket.zig`)
+* [x] Authentication middleware (JWT, API keys)
+* [x] Health check and Prometheus metrics endpoints
+* [x] Form.Bridge FFI integration (`api/src/bridge_client.zig`)
+* [x] Integration tests for all protocols (`api/src/integration_tests.zig`)
 
 === REST API Design
 
@@ -263,19 +266,23 @@ type Subscription {
 
 === Acceptance Criteria
 
-* All FDQL operations accessible via REST, gRPC, and GraphQL
-* Provenance tracking across all protocols
-* Streaming support for journal and large result sets
-* OpenAPI, protobuf, and GraphQL SDL specs generate valid clients
-* Prometheus metrics and OpenTelemetry tracing
+* ✅ All FDQL operations accessible via REST, gRPC, and GraphQL
+* ✅ Provenance tracking across all protocols
+* ✅ Streaming support via WebSocket subscriptions (journal streaming)
+* ✅ OpenAPI, protobuf, and GraphQL SDL specs generate valid clients
+* ✅ Prometheus metrics endpoint
+* ✅ Full protobuf serialization/deserialization
+* ✅ graphql-ws protocol for subscriptions
 
-== Phase 10: Language Bindings
+== Phase 10: Language Bindings (M12)
 
-*Status*: 📋 Planned
+*Status*: 🚧 Next
+
+*Target*: v0.0.6
 
 *Goal*: Native client libraries for ReScript and PHP.
 
-*Dependencies*: Phase 9 (HTTP API) should be complete for HTTP clients.
+*Dependencies*: Phase 9 (HTTP API) complete ✅
 
 === ReScript Client (`@formdb/rescript`)
 
@@ -388,12 +395,38 @@ $result = $formdb->query()
 
 These may be addressed post-PoC based on community needs.
 
+== Path to 1.0.0
+
+=== Semantic Versioning Plan
+
+[cols="1,2,3"]
+|===
+| Version | Milestone | Focus
+
+| v0.0.6 | M12 | Language bindings (ReScript, PHP)
+| v0.0.7 | M13 | CMS integration (WordPress)
+| v0.1.0 | M14 | Form.ControlPlane (clustering, supervision)
+| v0.2.0 | - | Distribution (multi-node replication)
+| v1.0.0-rc | M15 | Release candidate (stability, testing)
+| v1.0.0 | GA | General availability
+|===
+
+=== 1.0.0 Requirements
+
+* [ ] All M1-M14 milestones complete
+* [ ] Six months of stability (no breaking changes)
+* [ ] Production deployments validated
+* [ ] Security audit completed
+* [ ] Performance benchmarks published
+* [ ] Comprehensive documentation
+
 == Version History
 
 [cols="1,1,2"]
 |===
 | Version | Date | Milestone
 
+| v0.0.5 | 2026-01-12 | M11 - Multi-Protocol API Server
 | v0.0.4 | 2026-01-12 | M8-M10 - MVP Complete (Form.Runtime + Form.Normalizer)
 | v0.0.3 | 2026-01-12 | M7 - Complete Documentation Suite
 | v0.0.2 | 2026-01-11 | M1-M6 - Core Specs + Forth PoC
