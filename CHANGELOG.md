@@ -9,6 +9,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
+## [0.0.10] - 2026-01-12
+
+Final Stabilization milestone: **M16 Complete - Ready for 1.0.0**
+
+This release completes Milestone M16, the final stabilization before the 1.0.0 production release.
+
+### Added
+
+#### Configuration Validation (`stability/src/FormDB_Stability_Config.res`)
+- Type-safe configuration schema
+- Environment-specific validation rules
+- Production security enforcement (API key, CORS)
+- Environment variable loading
+- Validation error formatting
+
+#### Health Checks (`stability/src/FormDB_Stability_Health.res`)
+- Component health monitoring (Healthy/Degraded/Unhealthy)
+- Extensible health check registry
+- Built-in checks: memory, storage, bridge
+- Latency tracking per component
+- JSON export for Kubernetes probes
+
+#### Graceful Shutdown (`stability/src/FormDB_Stability_Shutdown.res`)
+- Coordinated shutdown sequence
+- Priority-based handler execution
+- Four shutdown phases: DrainConnections → FlushBuffers → CloseResources → Terminated
+- Configurable timeout
+- Status reporting
+
+#### Production Readiness (`stability/src/FormDB_Stability_Readiness.res`)
+- Pre-flight checks across 5 categories:
+  - Security: API key, CORS, TLS
+  - Performance: Pool size, query cache
+  - Reliability: Health endpoint, graceful shutdown
+  - Observability: Metrics, tracing, logging
+  - Configuration: Environment setting
+- Severity levels (Critical/Warning/Info)
+- Human-readable report formatting
+
+#### Documentation
+- `stability/README.md` - Comprehensive stability documentation
+- Kubernetes integration examples (liveness/readiness probes)
+- Production deployment best practices
+
+### Changed
+
+- STATE.scm updated to M16 100% completion
+- Added stability module to working-features
+
+---
+
 ## [0.0.9] - 2026-01-12
 
 Performance Optimization milestone: **M15 Complete**
@@ -608,6 +659,7 @@ Initial release: **Repository Initialization**
 
 | Version | Date | Milestone | Key Features |
 |---------|------|-----------|--------------|
+| 0.0.10 | 2026-01-12 | M16 Complete | Config validation, health checks, graceful shutdown, readiness |
 | 0.0.9 | 2026-01-12 | M15 Complete | Query cache, connection pool, batch ops, metrics |
 | 0.0.8 | 2026-01-12 | M14 Complete | Property tests, fuzz testing, integration tests, E2E tests |
 | 0.0.7 | 2026-01-12 | M13 Complete | Strapi, Directus, Ghost, Payload CMS integrations |
@@ -636,7 +688,8 @@ FormDB is in pre-1.0 development. APIs, formats, and interfaces may change witho
 
 ## Links
 
-[Unreleased]: https://github.com/hyperpolymath/formdb/compare/v0.0.9...HEAD
+[Unreleased]: https://github.com/hyperpolymath/formdb/compare/v0.0.10...HEAD
+[0.0.10]: https://github.com/hyperpolymath/formdb/compare/v0.0.9...v0.0.10
 [0.0.9]: https://github.com/hyperpolymath/formdb/compare/v0.0.8...v0.0.9
 [0.0.8]: https://github.com/hyperpolymath/formdb/compare/v0.0.7...v0.0.8
 [0.0.7]: https://github.com/hyperpolymath/formdb/compare/v0.0.6...v0.0.7
