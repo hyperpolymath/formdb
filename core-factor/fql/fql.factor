@@ -71,7 +71,7 @@ ERROR: fql-parse-error message position ;
     [ first ] [ drop f ] if-empty ;
 
 : consume-token ( tokens -- tokens' token )
-    unclip-slice swap ;
+    unclip-slice ;  ! Returns ( rest first ) = ( tokens' token ), token on top
 
 : try-consume ( tokens expected -- tokens' matched? )
     over peek-token dup [
@@ -312,7 +312,7 @@ DEFER: parse-statement
     fql-explain boa ;
 
 : parse-statement ( tokens -- tokens' ast )
-    consume-token >upper {
+    consume-token >upper {  ! After consume-token: ( tokens' token ), >upper: ( tokens' TOKEN )
         { "INSERT" [ parse-insert ] }
         { "SELECT" [ parse-select ] }
         { "UPDATE" [ parse-update ] }
