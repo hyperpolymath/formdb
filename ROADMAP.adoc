@@ -5,7 +5,24 @@
 [.lead]
 Development phases from concept to production.
 
-== Phase 0: Specification (Current)
+== Milestone Summary
+
+[cols="1,2,1,1"]
+|===
+| Milestone | Description | Version | Status
+
+| M1 | Core Specifications | v0.0.2 | ✅ Complete
+| M2-M5 | Forth PoC Implementation | v0.0.2 | ✅ Complete
+| M6 | Machine-Readable Artefacts | v0.0.2 | ✅ Complete
+| M7 | Complete Documentation Suite | v0.0.3 | ✅ Complete
+| M8 | Form.Runtime (FQL Engine) | - | 🚧 Next
+| M9 | Form.Normalizer | - | 📋 Planned
+| M10 | Production Hardening | - | 📋 Planned
+|===
+
+== Phase 0: Specification ✅
+
+*Status*: Complete (v0.0.2)
 
 *Goal*: Complete specifications for all core components.
 
@@ -13,76 +30,88 @@ Development phases from concept to production.
 
 * [x] `formdb.scm` - Unified specification
 * [x] Repository structure
-* [ ] `spec/blocks.adoc` - Block format spec
-* [ ] `spec/journal.adoc` - Journal format spec
-* [ ] `spec/rendering.adoc` - Canonical rendering rules
-* [ ] `spec/fql.adoc` - FQL grammar
+* [x] `spec/blocks.adoc` - Block format spec (4 KiB blocks, 64-byte headers)
+* [x] `spec/journal.adoc` - Journal format spec (append-only, sequence numbers)
+* [x] `spec/fql.adoc` - FQL grammar (EBNF, provenance syntax)
+* [x] `spec/fql-dependent-types.md` - FQLdt with Lean 4 integration
+* [x] `spec/self-normalizing.adoc` - Self-normalizing database spec
+* [x] `spec/cloud-storage.adoc` - Object storage integration
+* [x] `spec/fql-philosophy.adoc` - Design philosophy
 
-=== Open Questions to Resolve
+== Phase 1: Form.Blocks PoC ✅
 
-* Q-BLOCK-HEADER-001: Block header layout
-* Q-JOURNAL-ENTRY-001: Journal entry schema
-* Q-ABI-BLOBS-001: ABI blob encoding
-* Q-FQL-POC-001: FQL grammar
-
-== Phase 1: Form.Blocks PoC
+*Status*: Complete (v0.0.2)
 
 *Goal*: Working storage layer with journal and reversibility.
 
 === Deliverables
 
-* [ ] Fixed-size block implementation
-* [ ] Append-only journal
-* [ ] Crash recovery
-* [ ] Integrity checks
-* [ ] Repair guidance
-* [ ] Golden test vectors
+* [x] Fixed-size block implementation (`core-forth/src/formdb-blocks.fs`)
+* [x] Block header structure with magic, version, type, checksums
+* [x] Memory buffer management
+* [x] CRC32C implementation (Castagnoli polynomial)
 
-=== Acceptance Criteria
+== Phase 2: Form.Journal PoC ✅
 
-* All block operations journaled
-* Crash recovery restores consistent state
-* Deterministic text rendering for all blocks
-* Test vectors pass
+*Status*: Complete (v0.0.2)
 
-== Phase 2: Form.Model PoC
+*Goal*: Append-only journal with crash recovery.
+
+=== Deliverables
+
+* [x] Append-only journal (`core-forth/src/formdb-journal.fs`)
+* [x] Sequence numbering
+* [x] Operation logging with inverses
+* [x] Crash recovery primitives
+
+== Phase 3: Form.Model PoC ✅
+
+*Status*: Complete (v0.0.2)
 
 *Goal*: Multi-model layer on top of blocks.
 
 === Deliverables
 
-* [ ] Document collections
-* [ ] Edge collections
-* [ ] Schema metadata storage
-* [ ] Constraint enforcement
-* [ ] Migration artefacts
+* [x] Document collection support (`core-forth/src/formdb-model.fs`)
+* [x] Edge collection support
+* [x] Schema metadata storage
+* [x] Constraint storage
 
-=== Acceptance Criteria
+== Phase 4: Form.Bridge ✅
 
-* Documents insertable/queryable
-* Edges create graph relationships
-* Constraints produce explainable rejections
-* Migrations are reversible
+*Status*: Complete (v0.0.2)
 
-== Phase 3: Form.Bridge
-
-*Goal*: Stable C ABI for runtime integration.
+*Goal*: Stable ABI for runtime integration.
 
 === Deliverables
 
-* [ ] Zig ABI implementation
-* [ ] Error blob handling
-* [ ] Introspection surfaces
-* [ ] Render surfaces
+* [x] Zig-only ABI (C dependency eliminated)
+* [x] FFI design for Factor integration
 
-=== Acceptance Criteria
+=== Note
 
-* FFI callable from Factor
-* All errors are renderable
-* Introspection returns usable data
-* No memory leaks across boundary
+Architecture changed from C ABI to Zig-only ABI for better safety and integration.
 
-== Phase 4: Form.Runtime PoC
+== Phase 5: Documentation ✅
+
+*Status*: Complete (v0.0.3)
+
+*Goal*: Comprehensive documentation for production use.
+
+=== Deliverables
+
+* [x] `QUICKSTART.adoc` - 15-minute tutorial
+* [x] `VERSIONING.adoc` - Stability policy
+* [x] `docs/DEPLOYMENT.adoc` - Docker, Kubernetes, systemd
+* [x] `docs/SECURITY-AUTH.adoc` - Authentication, authorization, hardening
+* [x] `docs/API-REFERENCE.adoc` - Form.Bridge FFI, FQL API
+* [x] `docs/MIGRATION-FROM-RDBMS.adoc` - PostgreSQL/MySQL/SQLite migration
+* [x] `docs/OBSERVABILITY.adoc` - Logging, metrics, tracing, dashboards
+* [x] `docs/INTEGRATION-PATTERNS.adoc` - Message queues, search, analytics, AI/ML
+
+== Phase 6: Form.Runtime PoC (Current)
+
+*Status*: 🚧 In Progress
 
 *Goal*: FQL parser/planner/executor.
 
@@ -101,24 +130,9 @@ Development phases from concept to production.
 * Provenance tracks to journal entries
 * Constraint rejections explained
 
-== Phase 5: Integration & Polish
+== Phase 7: Form.Normalizer (Self-Normalizing)
 
-*Goal*: Complete PoC with all seam checks passing.
-
-=== Deliverables
-
-* [ ] Seam check automation
-* [ ] End-to-end test suite
-* [ ] Documentation polish
-* [ ] Example narratives
-
-=== Acceptance Criteria
-
-* All seam checks (B↔M, M↔R, B↔R) pass
-* Golden test vectors complete
-* Stories demonstrate target use cases
-
-== Phase 6: Form.Normalizer (Self-Normalizing)
+*Status*: 📋 Planned
 
 *Goal*: Automatic functional dependency discovery, type-encoded normal forms, and proof-carrying schema evolution.
 
@@ -151,11 +165,32 @@ Development phases from concept to production.
 
 See link:spec/self-normalizing.adoc[Self-Normalizing Specification] for full details.
 
+== Phase 8: Production Hardening
+
+*Status*: 📋 Planned
+
+*Goal*: Complete PoC with all seam checks passing, production-ready.
+
+=== Deliverables
+
+* [ ] Seam check automation (B↔M, M↔R, B↔R)
+* [ ] End-to-end test suite
+* [ ] Performance benchmarks
+* [ ] Security audit
+* [ ] Example narratives for target domains
+
+=== Acceptance Criteria
+
+* All seam checks pass
+* Golden test vectors complete
+* Stories demonstrate target use cases (journalism, governance, archives)
+* Security review passed
+
 == Future Phases (Post-PoC)
 
 === Form.ControlPlane
 
-* Elixir/OTP session management
+* Gleam/OTP session management
 * Cluster coordination
 * Production supervision
 
@@ -167,16 +202,31 @@ See link:spec/self-normalizing.adoc[Self-Normalizing Specification] for full det
 
 === Ecosystem
 
-* Language bindings (Rust, Python, etc.)
+* Language bindings (Rust, ReScript, etc.)
 * IDE integration
 * Visualization tools
+* FormDB Studio (zero-friction GUI)
+* FormDB Debugger (proof-carrying debugger)
 
 == Non-Goals (Explicitly Deferred)
 
 * SQL compatibility layer
 * OLAP optimizations
-* Full-text search
+* Full-text search (use integration patterns instead)
 * Time-series optimizations
-* Real-time subscriptions
+* Real-time subscriptions (use CDC/webhooks instead)
 
 These may be addressed post-PoC based on community needs.
+
+== Version History
+
+[cols="1,1,2"]
+|===
+| Version | Date | Milestone
+
+| v0.0.3 | 2026-01-12 | M7 - Complete Documentation Suite
+| v0.0.2 | 2026-01-11 | M1-M6 - Core Specs + Forth PoC
+| v0.0.1 | 2026-01-03 | Repository Initialization
+|===
+
+See link:CHANGELOG.md[CHANGELOG] for detailed release notes.
