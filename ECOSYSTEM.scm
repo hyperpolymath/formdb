@@ -16,6 +16,18 @@
       "Explainable constraint rejections"))
 
   (related-projects
+    (projection-layer
+      (project "formbd-geo")
+      (relationship "projection-layer")
+      (description "R-tree spatial indexing over FormBD documents")
+      (synergy "Provides geospatial queries without compromising FormBD's auditability principles"))
+
+    (projection-layer
+      (project "formbd-analytics")
+      (relationship "projection-layer")
+      (description "Columnar OLAP analytics over FormBD documents")
+      (synergy "Provides fast aggregations and PROMPT score analytics as materialized projections"))
+
     (sibling-standard
       (project "valence-shell")
       (relationship "sibling-standard")
@@ -67,7 +79,8 @@
 
   (what-this-is-not
     "A drop-in replacement for PostgreSQL or MySQL"
-    "A high-performance OLAP solution"
+    "A high-performance OLAP solution (see formbd-analytics for analytics projections)"
+    "A spatial database (see formbd-geo for geospatial projections)"
     "A distributed database (in PoC phase)"
     "A general-purpose NoSQL database"
     "A time-series optimized store"))
