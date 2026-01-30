@@ -1,3 +1,4 @@
+;; SPDX-License-Identifier: PMPL-1.0-or-later
 ;; ECOSYSTEM.scm - FormBD Position in Ecosystem
 ;; Media-Type: application/vnd.ecosystem+scm
 
@@ -41,7 +42,7 @@
       (synergy "FormBD could be the persistent store for anamnesis memories"))
 
     (potential-consumer
-      (project "gitvisor")
+      (project "git-hud")
       (relationship "potential-consumer")
       (description "Git repository governance")
       (synergy "FormBD for storing governance audit trails"))

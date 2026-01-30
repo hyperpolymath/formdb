@@ -1,3 +1,4 @@
+;; SPDX-License-Identifier: PMPL-1.0-or-later
 ;; STATE.scm - FormBD Project State
 ;; Media-Type: application/vnd.state+scm
 
